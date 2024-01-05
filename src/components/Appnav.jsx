@@ -11,7 +11,7 @@ export default function Appnav(){
         <div className="w-full px-10 hidden lg:block bg-white z-50">
           <nav className="flex items-center justify-between py-5 px-5">
             <div>
-              <h1 className="font-bebas text-[28px]">Echo-Mart</h1>
+              <h1 className="font-poppins text-[28px]">Eco-Mart</h1>
             </div>
             <div>
               <ul className="flex items-center justify-end gap-4 uppercase font-openSans text-[14px] font-semibold">

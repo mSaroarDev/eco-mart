@@ -1,17 +1,18 @@
 /* font */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Poppins:wght@400;600;700&display=swap');
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* custon fonts */
-.bebas{
-    font-family: 'Bebas Neue', sans-serif;
+.lato{
+  font-family: 'Lato', sans-serif;
 }
 
-.open-sans {
-    font-family: 'Open Sans', sans-serif;
+.poppins {
+  font-family: 'Poppins', sans-serif;
 }
 
 /* scrollbar */

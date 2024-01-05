@@ -2,6 +2,7 @@
 import { useState } from "react";
 import TodayBestSalesProducts from "./TodayBestSaleProduct";
 import CartItem from "./CartItem";
+import Link from "next/link";
 
 export default function CartButton() {
   const [showCart, setShowCart] = useState(false);
@@ -34,7 +35,7 @@ export default function CartButton() {
 
         {/* cart */}
         {showCart && (
-          <div className={`__cart ${showCart ? 'show' : ''}`}>
+          <div className={`__cart ${showCart ? "show" : ""}`}>
             <div className="bg-white w-[400px] h-auto p-5 rounded-md shadow-md z-10">
               <div className="flex items-center justify-between">
                 <h5 className="font-medium text-base text-gray-600">
@@ -65,7 +66,10 @@ export default function CartButton() {
                 <p className="text-base text-gray-600">$100.00</p>
               </div>
 
-              <button className="w-full bg-brand text-white p-2 text-center flex items-center justify-center gap-3 mt-5">
+              <Link
+                href={"/cart"}
+                className="w-full bg-brand text-white p-2 text-center flex items-center justify-center gap-3 mt-5"
+              >
                 <span>Checkout</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +85,7 @@ export default function CartButton() {
                     d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
                   />
                 </svg>
-              </button>
+              </Link>
             </div>
           </div>
         )}
