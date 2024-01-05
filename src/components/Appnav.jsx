@@ -8,7 +8,7 @@ export default function Appnav(){
 
     return (
       <>
-        <div className="w-full px-10 hidden lg:block bg-white">
+        <div className="w-full px-10 hidden lg:block bg-white z-50">
           <nav className="flex items-center justify-between py-5 px-5">
             <div>
               <h1 className="font-bebas text-[28px]">Echo-Mart</h1>

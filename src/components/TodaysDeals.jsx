@@ -5,7 +5,7 @@ export default function TodaysDeals() {
     <>
       <div className="__product px-10 py-3 flex flex-wrap lg:flex-nowrap items-center justify-start gap-5">
         <div className="__image min-w-[280px] h-[280px] relative mt-4 lg:mt-0">
-          <div className="w-12 h-12 p-3 bg-brand text-white rounded-full flex items-center justify-center font-semibold absolute -top-3 -right-3 z-50">
+          <div className="w-12 h-12 p-3 bg-brand text-white rounded-full flex items-center justify-center font-semibold absolute -top-3 -right-3 z-10">
             -13%
           </div>
           <Image

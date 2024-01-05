@@ -52,3 +52,28 @@ img.vert-move {
       transform: translateY(-15px);
     }
   }
+
+  .hidden-menu{
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .menu-active{
+    opacity: 1;
+  }
+
+  /* cart */
+  .__cart {
+    position: absolute;
+    right: 0;
+    top: 56px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 10;
+  }
+  
+  .__cart.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
