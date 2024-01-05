@@ -1,3 +1,4 @@
+import Toploader from "@/components/TopLoading";
 import "./globals.css";
 
 export const metadata = {
@@ -8,7 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="font-lato min-h-screen bg-gray-100">{children}</body>
+      <body className="font-lato min-h-screen bg-gray-100">
+        <Toploader />
+        {children}
+      </body>
     </html>
   );
 }

@@ -40,7 +40,7 @@ export default function CartItemList() {
             className="max-w-[50px] border-[1px] border-gray-300 focus:outline-0 text-center"
           />
         </div>
-        <div className="w-1/6">$200.00</div>
+        <div className="w-1/6 text-right pr-7">$200.00</div>
       </div>
     </>
   );

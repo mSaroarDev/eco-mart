@@ -15,7 +15,7 @@ export default function CartPage() {
       </div>
 
       {/* cart start */}
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="p-10">
           <div className="text-center">
             <h2 className="text-xl font-medium">
@@ -23,13 +23,13 @@ export default function CartPage() {
             </h2>
           </div>
 
-          <div className="bg-white mt-10">
+          <div className="bg-white mt-10 w-full">
             {/* items heading */}
-            <div className="__headings flex items-center gap-3 border-b-[1px] border-gray-300 p-5">
+            <div className="__headings flex items-center gap-3 border-b-[1px] border-gray-300 p-5 bg-slate-50">
               <div className="w-3/6">Item Name</div>
               <div className="w-1/6">Unit Price</div>
               <div className="w-1/6">Quantity</div>
-              <div className="w-1/6">Total Price</div>
+              <div className="w-1/6 text-right">Total Price</div>
             </div>
 
             {/* items list */}

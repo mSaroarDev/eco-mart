@@ -78,3 +78,20 @@ img.vert-move {
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* input */
+  .login label{
+    @apply text-gray-700 font-semibold
+  }
+
+  .login .login-input {
+    @apply bg-slate-50 px-4 py-2 rounded-md border-[1px] focus:shadow-sm focus:outline-0 
+  }
+
+  .input-error{
+    @apply border-red-500;
+  }
+
+  .input-ok{
+    @apply border-slate-50;
+  }

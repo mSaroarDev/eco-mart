@@ -16,7 +16,7 @@ export default function Topbar() {
               <li>
                 <Link
                   className="flex items-center gap-1 hover:underline text-black"
-                  href={"/"}
+                  href={"/sign-in"}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
