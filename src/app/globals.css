@@ -95,3 +95,12 @@ img.vert-move {
   .input-ok{
     @apply border-slate-50;
   }
+
+  /* sidebar links */
+  .link-sidebar {
+    @apply px-4 py-2 hover:bg-brand/5 rounded-lg duration-150
+  }
+
+  .link-active {
+    @apply bg-brand/10
+  }
