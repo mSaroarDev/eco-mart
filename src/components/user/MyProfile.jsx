@@ -1,15 +1,17 @@
+"use client";
 import Image from "next/image";
 import SignOutButton from "../Signout";
 import Link from "next/link";
 
-export default function MyProfile() {
+export default function MyProfile({action}) {
   const email = "msaroar.dev@gmail.com";
   const address = "Rajshahi Bangladesh";
+
   return (
     <>
       <div className="w-[250px] bg-white fixed right-4 top-4 bottom-4 shadow-md rounded-md p-3">
         <div className="flex flex-col items-start justify-between h-full w-full">
-          <div>
+          <div className="w-full">
             <h2 className="text-base font-semibold">My Profile</h2>
             <div className="flex flex-col items-center justify-center mt-7 rounded-full">
               <img
@@ -127,9 +129,8 @@ export default function MyProfile() {
             </div>
           </div>
           <div className="w-full">
-            <Link
-              href={"/"}
-              className="flex items-center justify-center gap-3 bg-brand text-white p-2 rounded-md"
+            <button onClick={action}
+              className="w-full flex items-center justify-center gap-3 bg-brand text-white p-2 rounded-md"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +148,7 @@ export default function MyProfile() {
               </svg>
 
               <span>Edit Profile</span>
-            </Link>
+            </button>
           </div>
         </div>
       </div>

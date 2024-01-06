@@ -13,6 +13,9 @@ export default function CategoryListAll(){
                             <li><CategoryList /></li>
                             <li><CategoryList /></li>
                             <li><CategoryList /></li>
+                            <li><CategoryList /></li>
+                            <li><CategoryList /></li>
+                            <li><CategoryList /></li>
                         </ul>
                     </div>
       </>

@@ -1,15 +1,16 @@
+"use cleint";
 import Image from "next/image";
 import SignOutButton from "../Signout";
 import Link from "next/link";
 
-export default function MyProfile() {
+export default function EditProfile({action}) {
   const email = "msaroar.dev@gmail.com";
   const address = "Rajshahi Bangladesh";
   return (
     <>
       <div className="w-[250px] bg-white fixed right-4 top-4 bottom-4 shadow-md rounded-md p-3">
         <div className="flex flex-col items-start justify-between h-full w-full">
-          <div>
+          <div className="w-full">
             <h2 className="text-base font-semibold">My Profile</h2>
             <div className="flex flex-col items-center justify-center mt-7 rounded-full">
               <img
@@ -18,11 +19,47 @@ export default function MyProfile() {
               />
               <h2 className="font-bold mt-5">Saroar Jahan</h2>
               <span className="text-xs">msaroar.dev@gmail.com</span>
+              <button className="flex items-center gap-2 text-xs text-red-500 mt-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-3 h-3"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
+                <span>Change Image</span>
+              </button>
+
+              <button className="flex items-center gap-2 text-xs text-green-600 mt-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+                  />
+                </svg>
+
+                <span>Upload Image</span>
+              </button>
             </div>
 
-            <div className="__info text-sm mt-7 p-4">
+            <div className="__info text-sm mt-3 p-4">
               <div className="flex items-center gap-3 my-3">
-                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -40,12 +77,16 @@ export default function MyProfile() {
                 </div>
                 <div>
                   <p className="font-medium text-gray-500">Full Name</p>
-                  <p className="font-medium text-black">Saroar Jahan</p>
+                  <input
+                    type="text" 
+                    value={"Saroar Jahan"}
+                    className="font-medium text-black max-w-[70%] bg-slate-100 px-2 py-1 border-[0.5px] border-slate-200 rounded-md focus:outline-0 focus:shadow-sm"
+                  />
                 </div>
               </div>
               {/*  */}
               <div className="flex items-center gap-3 my-3">
-                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -64,14 +105,18 @@ export default function MyProfile() {
                 <div>
                   <p className="font-medium text-gray-500">Email</p>
                   <p className="font-medium text-black mb-3">
-                    {`${email.slice(0, 10)}...`}
+                    <input
+                      type="text"
+                      value={email}
+                      className="font-medium text-black max-w-[70%] bg-slate-100 px-2 py-1 border-[0.5px] border-slate-200 rounded-md focus:outline-0 focus:shadow-sm"
+                    />
                   </p>
                 </div>
               </div>
 
               {/*  */}
               <div className="flex items-center gap-3 my-3">
-                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -94,16 +139,17 @@ export default function MyProfile() {
                 </div>
                 <div>
                   <p className="font-medium text-gray-500">Address</p>
-                  <p className="font-medium text-black mb-3">{`${address.slice(
-                    0,
-                    15
-                  )}...`}</p>
+                  <input
+                    type="text"
+                    value={address}
+                    className="font-medium text-black max-w-[70%] bg-slate-100 px-2 py-1 border-[0.5px] border-slate-200 rounded-md focus:outline-0 focus:shadow-sm"
+                  />
                 </div>
               </div>
 
               {/*  */}
               <div className="flex items-center gap-3 my-3">
-                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full bg-brand text-white flex items-center justify-center p-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -121,33 +167,23 @@ export default function MyProfile() {
                 </div>
                 <div>
                   <p className="font-medium text-gray-500">Contact No</p>
-                  <p className="font-medium text-black mb-3">+1234567890</p>
+                  <input
+                    type="text"
+                    value={"+1234567890"}
+                    className="font-medium text-black max-w-[70%] bg-slate-100 px-2 py-1 border-[0.5px] border-slate-200 rounded-md focus:outline-0 focus:shadow-sm"
+                  />
                 </div>
               </div>
             </div>
           </div>
           <div className="w-full">
-            <Link
-              href={"/"}
-              className="flex items-center justify-center gap-3 bg-brand text-white p-2 rounded-md"
+            <button
+              onClick={action}
+              type="submit"
+              className="w-full flex items-center justify-center gap-3 bg-brand text-white p-2 rounded-md"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                />
-              </svg>
-
-              <span>Edit Profile</span>
-            </Link>
+              <span>Save</span>
+            </button>
           </div>
         </div>
       </div>
