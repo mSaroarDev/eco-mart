@@ -58,7 +58,7 @@ export default function Sidenav() {
             <span>My Orders</span>
           </Link>
 
-          <Link href={"/users/sipping"} className={`flex items-center gap-3 link-sidebar ${path === "/users/sipping" ? "link-active" : ""}`}>
+          <Link href={"/users/shipping"} className={`flex items-center gap-3 link-sidebar ${path === "/users/shipping" ? "link-active" : ""}`}>
             <span className="text-brand">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

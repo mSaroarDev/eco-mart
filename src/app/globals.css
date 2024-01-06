@@ -81,7 +81,7 @@ img.vert-move {
 
   /* input */
   .login label{
-    @apply text-gray-700 font-semibold
+    @apply text-gray-700 font-semibold mb-2 inline-block
   }
 
   .login .login-input {
