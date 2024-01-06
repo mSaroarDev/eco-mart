@@ -16,7 +16,7 @@ const inter = Inter({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`min-h-screen bg-gray-100 ${inter.className}`}>
+      <body className={`min-h-screen bg-gray-50 ${inter.className}`}>
         <Toploader />
         {children}
       </body>

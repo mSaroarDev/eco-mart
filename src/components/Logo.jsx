@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Logo() {
   return (
     <>
       <Link href={"/"}>
-        <h1 className="font-poppins text-[22px] font-bold">ECO-MART SHOP</h1>
+        <Image src="/LOGO.png" height={150} width={220} alt="Logo" />
       </Link>
     </>
   );
