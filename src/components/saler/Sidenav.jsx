@@ -70,9 +70,9 @@ export default function Sidenav() {
               </Link>
 
               <Link
-                href={"/saler/products"}
+                href={"/saler/products?page=1"}
                 className={`flex items-center gap-3 link-sidebar ${
-                  path === "/saler/shipping" ? "link-active" : ""
+                  path === "/saler/products" ? "link-active" : ""
                 }`}
               >
                 <span className="text-brand">
@@ -96,7 +96,7 @@ export default function Sidenav() {
               </Link>
 
               <Link
-                href={"/saler/customers"}
+                href={"/saler/customers?page=1"}
                 className={`flex items-center gap-3 link-sidebar ${
                   path === "/saler/shipping" ? "link-active" : ""
                 }`}
@@ -117,7 +117,7 @@ export default function Sidenav() {
               </Link>
 
               <Link
-                href={"/users/payments"}
+                href={"/users/payments?page=1"}
                 className={`flex items-center gap-3 link-sidebar ${
                   path === "/users/payments" ? "link-active" : ""
                 }`}
