@@ -104,3 +104,17 @@ img.vert-move {
   .link-active {
     @apply bg-brand/10
   }
+
+  /* pagginatioin */
+  .join {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden
+  }
+
+  .join a {
+    @apply bg-brand/5 hover:bg-brand/10 h-10 w-10 flex items-center justify-center
+  }
+ 

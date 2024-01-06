@@ -16,7 +16,7 @@ export default function Sidenav() {
         </div>
 
         <div className="__Links flex flex-col px-3 gap-3">
-          <Link href={"/"} className={`flex items-center gap-3 link-sidebar ${path === "/users/dashboard" ? "link-active" : ""}`}>
+          <Link href={"/users/dashboard"} className={`flex items-center gap-3 link-sidebar ${path === "/users/dashboard" ? "link-active" : ""}`}>
             <span className="text-brand">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ export default function Sidenav() {
             <span>Dashboard</span>
           </Link>
 
-          <Link href={"/"} className={`flex items-center gap-3 link-sidebar ${path === "/users/my-orders" ? "link-active" : ""}`}>
+          <Link href={"/users/my-orders"} className={`flex items-center gap-3 link-sidebar ${path === "/users/my-orders" ? "link-active" : ""}`}>
             <span className="text-brand">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ export default function Sidenav() {
             <span>My Orders</span>
           </Link>
 
-          <Link href={"/"} className={`flex items-center gap-3 link-sidebar ${path === "/users/sipping" ? "link-active" : ""}`}>
+          <Link href={"/users/sipping"} className={`flex items-center gap-3 link-sidebar ${path === "/users/sipping" ? "link-active" : ""}`}>
             <span className="text-brand">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ export default function Sidenav() {
             <span>Shipping</span>
           </Link>
 
-          <Link href={"/"} className={`flex items-center gap-3 link-sidebar ${path === "/users/payments" ? "link-active" : ""}`}>
+          <Link href={"/users/payments"} className={`flex items-center gap-3 link-sidebar ${path === "/users/payments" ? "link-active" : ""}`}>
             <span className="text-brand">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
