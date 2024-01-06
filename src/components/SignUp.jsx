@@ -9,7 +9,7 @@ export default function SignUp() {
   return (
     <>
       <div className="min-h-screen w-full flex items-center justify-center">
-        <div className="w-full max-w-[450px] bg-white p-10 rounded-lg shadow-md">
+        <div className="w-full max-w-[900px] bg-white p-10 rounded-lg shadow-md">
           <div className="mb-4 inline-block">
             <Link href={"/"} className="flex items-center gap-3">
               <svg
@@ -31,8 +31,10 @@ export default function SignUp() {
             </Link>
           </div>
           <h3 className="my-3 text-lg font-semibold">Login Here to continue</h3>
-          <form className="flex flex-col gap-5 login">
-          <div className="flex flex-col gap-2">
+          <form className="grid grid-cols-12 gap-5 login">
+
+            <div className="col-span-12 lg:col-span-6">
+            <div className="flex flex-col gap-2">
               <label htmlFor="email">Full Name</label>
               <input
                 type="text"
@@ -40,6 +42,9 @@ export default function SignUp() {
                 className={`login-input ${error ? "input-error" : "input-ok"}`}
               />
             </div>
+            </div>
+
+            <div className="col-span-12 lg:col-span-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="email">Email</label>
               <input
@@ -48,6 +53,9 @@ export default function SignUp() {
                 className={`login-input ${error ? "input-error" : "input-ok"}`}
               />
             </div>
+            </div>
+
+            <div className="col-span-12 lg:col-span-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="email">Password</label>
               <input
@@ -56,6 +64,9 @@ export default function SignUp() {
                 className={`login-input ${error ? "input-error" : "input-ok"}`}
               />
             </div>
+            </div>
+
+            <div className="col-span-12 lg:col-span-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="email">Confirm Password</label>
               <input
@@ -64,15 +75,41 @@ export default function SignUp() {
                 className={`login-input ${error ? "input-error" : "input-ok"}`}
               />
             </div>
-            
+            </div>
+
+            <div className="col-span-12 lg:col-span-6">
             <div className="flex flex-col gap-2">
-              <button
+              <label htmlFor="email">Account Type</label>
+              <select className={`login-input appearance-none ${error ? "input-error" : "input-ok"}`}>
+                <option value="">Select</option>
+                <option value="Buyer">Buyer</option>
+                <option value="Saler">Saler</option>
+              </select>
+            </div>
+            </div>
+
+            <div className="col-span-12 lg:col-span-6">
+              
+            </div>
+
+            <div className="col-span-12 lg:col-span-6">
+            <button
                 type="submit"
                 className="bg-brand rounded-md text-white w-full py-2"
               >
                 Sign Up
               </button>
             </div>
+
+
+          
+            
+            
+            
+
+            
+            
+            
           </form>
 
           <div className="text-right underline my-2">

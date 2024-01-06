@@ -11,7 +11,7 @@ export default function DashboardGreetings() {
               width={200}
               height={250}
               alt="image"
-              className="-mt-5 ml-16"
+              className="-mt-10 ml-16"
             />
           </div>
           <div className="col-span-7 flex items-center justify-center">
