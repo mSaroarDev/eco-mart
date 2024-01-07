@@ -9,3 +9,93 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model users {
+  id              String   @id @default(cuid())
+  serial          Int      @unique @default(autoincrement())
+  name            String
+  email           String   @unique
+  password        String
+  role            String
+  address         String?  @db.MediumText
+  contact_no      String?
+  profile_image   String?
+  image_public_id String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+}
+
+model categories {
+  id              String   @id @default(cuid())
+  serial          Int      @unique @default(autoincrement())
+  category_name   String
+  category_image  String
+  image_public_id String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+}
+
+model featured_categories {
+  id              String   @id @default(cuid())
+  serial          Int      @unique @default(autoincrement())
+  order           Int
+  category_name   String
+  category_image  String
+  category_link   String
+  image_public_id String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+}
+
+model today_deals {
+  id         String   @id @default(cuid())
+  serial     Int      @unique @default(autoincrement())
+  product_id String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+}
+
+model products {
+  id              String   @id @default(cuid())
+  serial          Int      @unique @default(autoincrement())
+  product_name    String
+  ratings         Int
+  short_des       String   @db.LongText
+  regular_price   String?
+  price           String
+  description     String   @db.LongText
+  product_image   String
+  image_public_id String
+  created_by      String
+  category_id     String
+  category_name   String
+  availability    String   @default("In Stock")
+  status          String   @default("Published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+}
+
+model orders {
+  id         String   @id @default(cuid())
+  serial     Int      @unique @default(autoincrement())
+  status     String   @default("In Cart")
+  created_by String
+  subtotal   String
+  vat        String
+  discount   String
+  gross      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+}
+
+model order_items {
+  id          String   @id @default(cuid())
+  serial      Int      @unique @default(autoincrement())
+  order_id    String
+  product_id  String
+  unit_price  String
+  quantity    String
+  total_price String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
