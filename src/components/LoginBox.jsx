@@ -124,7 +124,7 @@ export default function LoginBox() {
 
           <div className="my-3 text-base text-center text-gray-500">OR</div>
 
-          <button onClick={() => signIn("google", { callbackUrl: "/" })} className="bg-slate-100 text-black py-2 w-full flex items-center justify-center gap-3 rounded-md">
+          <button onClick={() => signIn("google", { callbackUrl: "/logged" })} className="bg-slate-100 text-black py-2 w-full flex items-center justify-center gap-3 rounded-md">
             <Image src="/google.svg" height={20} width={20} alt="google" />
             <span>Sign in with Google</span>
           </button>

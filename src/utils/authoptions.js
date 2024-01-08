@@ -19,8 +19,6 @@ export const authOptions = {
         const { email, password } = credentials;
         const md5Password = md5(password);
 
-        console.log(md5Password);
-
         try {
           const user = await prisma.users.findUnique({
             where: {
