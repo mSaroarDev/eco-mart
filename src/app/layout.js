@@ -1,6 +1,7 @@
 import Toploader from "@/components/TopLoading";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import AuthProvider from "@/utils/AuthProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`min-h-screen bg-gray-50 ${inter.className}`}>
         <Toploader />
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

@@ -1,120 +1,139 @@
 /* font */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Poppins:wght@400;600;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Poppins:wght@400;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* custon fonts */
-.lato{
-  font-family: 'Lato', sans-serif;
+.lato {
+  font-family: "Lato", sans-serif;
 }
 
 .poppins {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* scrollbar */
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
-    @apply bg-white; /* Set the background color to black */
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    @apply bg-brand/50; /* Set the scrollbar thumb color to white */
-    border-radius: 10px;
-  }
+  width: 10px;
+  @apply bg-white; /* Set the background color to black */
+}
 
-  
-  /* img animation */
+::-webkit-scrollbar-thumb {
+  @apply bg-brand/50; /* Set the scrollbar thumb color to white */
+  border-radius: 10px;
+}
+
+/* img animation */
 img.vert-move {
-    -webkit-animation: mover 1s infinite alternate;
-    animation: mover 1s infinite alternate;
-  }
-  img.vert-move {
-    -webkit-animation: mover 1s infinite alternate;
-    animation: mover 1s infinite alternate;
-  }
-  @-webkit-keyframes mover {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-15px);
-    }
-  }
-  @keyframes mover {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-15px);
-    }
-  }
-
-  .hidden-menu{
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  .menu-active{
-    opacity: 1;
-  }
-
-  /* cart */
-  .__cart {
-    position: absolute;
-    right: 0;
-    top: 56px;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    z-index: 10;
-  }
-  
-  .__cart.show {
-    opacity: 1;
+  -webkit-animation: mover 1s infinite alternate;
+  animation: mover 1s infinite alternate;
+}
+img.vert-move {
+  -webkit-animation: mover 1s infinite alternate;
+  animation: mover 1s infinite alternate;
+}
+@-webkit-keyframes mover {
+  0% {
     transform: translateY(0);
   }
-
-  /* input */
-  .login label{
-    @apply text-gray-700 font-semibold mb-2 inline-block
+  100% {
+    transform: translateY(-15px);
   }
-
-  .login .login-input {
-    @apply bg-slate-50 px-4 py-2 rounded-md border-[1px] focus:shadow-sm focus:outline-0 
+}
+@keyframes mover {
+  0% {
+    transform: translateY(0);
   }
-
-  .input-error{
-    @apply border-red-500;
+  100% {
+    transform: translateY(-15px);
   }
+}
 
-  .input-ok{
-    @apply border-slate-50;
-  }
+.hidden-menu {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
 
-  /* sidebar links */
-  .link-sidebar {
-    @apply px-4 py-2 hover:bg-brand/5 rounded-lg duration-150
-  }
+.menu-active {
+  opacity: 1;
+}
 
-  .link-active {
-    @apply bg-brand/10
-  }
+/* cart */
+.__cart {
+  position: absolute;
+  right: 0;
+  top: 56px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 10;
+}
 
-  /* pagginatioin */
-  .join {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    overflow: hidden
-  }
+.__cart.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  .join a {
-    @apply bg-brand/5 hover:bg-brand/10 h-10 w-10 flex items-center justify-center
-  }
- 
+/* input */
+.login label {
+  @apply text-gray-700 font-semibold mb-2 inline-block;
+}
+
+.login .login-input {
+  @apply bg-slate-50 px-4 py-2 rounded-md border-[1px] focus:shadow-sm focus:outline-0;
+}
+
+.input-error {
+  @apply border-red-500;
+}
+
+.input-ok {
+  @apply border-slate-50;
+}
+
+/* sidebar links */
+.link-sidebar {
+  @apply px-4 py-2 hover:bg-brand/5 rounded-lg duration-150;
+}
+
+.link-active {
+  @apply bg-brand/10;
+}
+
+/* pagginatioin */
+.join {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.join a {
+  @apply bg-brand/5 hover:bg-brand/10 h-10 w-10 flex items-center justify-center;
+}
+
+/* popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(1px); /* Adjust the blur intensity as needed */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-box {
+  background-color: #fff;
+  width: 640px;
+  height: auto;
+  border-radius: 14px;
+  border-top: 4px solid #FF5C00;
+  display: inline-block;
+  box-sizing: border-box;
+  /* z-index: 100; */
+}
