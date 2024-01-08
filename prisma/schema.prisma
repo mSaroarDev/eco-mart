@@ -31,6 +31,7 @@ model categories {
   category_name   String
   category_image  String
   image_public_id String
+  created_by      String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @default(now()) @updatedAt
 }

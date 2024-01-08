@@ -5,8 +5,9 @@ import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CldUploadButton } from "next-cloudinary";
+import Image from "next/image";
 
-export default function ProfileEditPopup({ action, profileData }) {
+export default function NewCategoryPopup({ action }) {
   // toast
   const showError = (m) => toast.error(m);
   const showSuccess = (m) => toast.success(m);
@@ -17,11 +18,11 @@ export default function ProfileEditPopup({ action, profileData }) {
   // loading
   const [loading, setLoading] = useState(false);
 
-  // useEffect
-  useEffect(() => {
-    setPublicId(profileData.image_public_id);
-    setImgUrl(profileData.profile_image);
-  }, [profileData]);
+  //   // useEffect
+  //   useEffect(() => {
+  //     setPublicId(profileData.image_public_id);
+  //     setImgUrl(profileData.profile_image);
+  //   }, [profileData]);
 
   // cloudinary image
   const [imgUrl, setImgUrl] = useState();
@@ -35,7 +36,7 @@ export default function ProfileEditPopup({ action, profileData }) {
       const imgUrl = info.secure_url;
       setPublicId(public_id);
       setImgUrl(imgUrl);
-      formik.setFieldValue("profile_image", imgUrl);
+      formik.setFieldValue("category_image", imgUrl);
       formik.setFieldValue("image_public_id", public_id);
     }
   };
@@ -60,7 +61,7 @@ export default function ProfileEditPopup({ action, profileData }) {
         showSuccess("Image deleted");
         setImgUrl("");
         setPublicId("");
-        formik.setFieldValue("profile_image", "");
+        formik.setFieldValue("category_image", "");
         formik.setFieldValue("image_public_id", "");
       }
     } catch (error) {
@@ -73,20 +74,21 @@ export default function ProfileEditPopup({ action, profileData }) {
   //  formik
   const formik = useFormik({
     initialValues: {
-      name: profileData.name,
-      email: profileData.email,
-      address: profileData.address,
-      contact_no: profileData.contact_no,
-      profile_image: profileData.profile_image,
-      image_public_id: profileData.image_public_id,
+      category_name: "",
+      category_image: "",
+      image_public_id: "",
     },
 
     onSubmit: async (values) => {
-      if (!values.name || !values.address || !values.contact_no) {
+      if (
+        !values.category_name ||
+        !values.category_image ||
+        !values.image_public_id
+      ) {
         showError("All fields required");
       } else {
         setLoading(true);
-        const res = await fetch("/api/user/edit-profile", {
+        const res = await fetch("/api/category/new", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -95,8 +97,8 @@ export default function ProfileEditPopup({ action, profileData }) {
         });
 
         setLoading(false);
-        if (res.status === 200) {
-          showSuccess("Profile Updated");
+        if (res.status === 201) {
+          showSuccess("Category Created.");
           router.refresh();
           setTimeout(() => {
             action();
@@ -113,7 +115,7 @@ export default function ProfileEditPopup({ action, profileData }) {
       <Toaster />
       <div className="popup-overlay">
         <div className="h-screen w-full flex items-center justify-center">
-          <div className="popup-box w-[640px]">
+          <div className="popup-box w-[400px]">
             {loading && <Spinner />}
             <form className="flex items-start justify-end p-2">
               <button
@@ -141,16 +143,11 @@ export default function ProfileEditPopup({ action, profileData }) {
               <div className="p-8">
                 <div className="grid grid-cols-12 gap-4">
                   <div className="col-span-4">
-                    <div className="__image w-28 h-28">
-                      <img
-                        src={
-                          imgUrl
-                            ? imgUrl
-                            : imgUrl === null
-                            ? "/no-image.avif"
-                            : profileData.profile_image
-                        }
-                        className="w-28 h-28 object-cover rounded-full ring-2 ring-brand"
+                    <div className="__image w-28 h-28 relative">
+                      <Image
+                        src={imgUrl ? imgUrl : "/no-image.avif"}
+                        fill
+                        className="absolute inset-0 object-cover z-10"
                         alt="Image"
                       />
                     </div>
@@ -166,23 +163,27 @@ export default function ProfileEditPopup({ action, profileData }) {
                       }}
                       onUpload={handleImageUpload}
                     >
-                        <span className={`flex items-center gap-2 text-sm text-green-600 mt-4 underline w-fit h-fit ${imgUrl && "hidden"}`}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-4 h-4"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-                            />
-                          </svg>
-                          <span>Upload</span>
-                        </span>
+                      <span
+                        className={`flex items-center gap-2 text-sm text-green-600 mt-4 underline w-fit h-fit ${
+                          imgUrl && "hidden"
+                        }`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+                          />
+                        </svg>
+                        <span>Upload</span>
+                      </span>
                     </CldUploadButton>
 
                     {/* delete button */}
@@ -212,42 +213,19 @@ export default function ProfileEditPopup({ action, profileData }) {
                   </div>
                 </div>
 
-                <div className="w-full">
+                <div className="w-full mt-5">
                   <form
                     onSubmit={formik.handleSubmit}
                     className="grid grid-cols-12 gap-5"
                   >
-                    <div className="col-span-6 mt-4">
+                    <div className="col-span-12 mt-4">
                       <div className="w-full flex flex-col login">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">Category Name</label>
                         <input
                           type="text"
-                          id="name"
-                          name="name"
-                          value={formik.values.name}
-                          onChange={formik.handleChange}
-                          className="login-input"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-span-6 mt-4">
-                      <div className="w-full flex flex-col login">
-                        <label htmlFor="email">Email</label>
-                        <span className="login-input text-gray-400 cursor-not-allowed">
-                          {formik.values.email}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="col-span-6">
-                      <div className="w-full flex flex-col login">
-                        <label htmlFor="address">Address</label>
-                        <input
-                          type="text"
-                          id="address"
-                          name="address"
-                          value={formik.values.address}
+                          id="category_name"
+                          name="category_name"
+                          value={formik.values.category_name}
                           onChange={formik.handleChange}
                           className="login-input"
                         />
@@ -255,26 +233,12 @@ export default function ProfileEditPopup({ action, profileData }) {
                     </div>
 
                     <div className="col-span-6">
-                      <div className="w-full flex flex-col login">
-                        <label htmlFor="phone">Phone</label>
-                        <input
-                          type="text"
-                          id="contact_no"
-                          name="contact_no"
-                          value={formik.values.contact_no}
-                          onChange={formik.handleChange}
-                          className="login-input"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-span-6 mt-4">
                       <div className="w-full flex flex-col login">
                         <button
                           type="submit"
                           className="bg-brand px-4 py-2 rounded-md text-white"
                         >
-                          Update
+                          Create Category
                         </button>
                       </div>
                     </div>

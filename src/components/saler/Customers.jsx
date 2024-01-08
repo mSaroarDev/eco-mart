@@ -1,18 +1,18 @@
+import formatDate from "@/lib/formatted-date";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function CustomerCard() {
+export default function CustomerCard({data}) {
   return (
     <>
       <div className="p-3 flex items-center gap-3 w-full border-t-[1px] border-gray-300">
         <div className="w-2/4">
           <div className="w-full flex items-center justify-start gap-4">
             <div className="w-24 h-24 relative">
-                <Image src="/pro-pic.jpeg" fill alt="Bag" className="absolute inset-0 object-cover rounded-full ring-2 ring-brand" />
+                <Image src={data?.profile_image} fill alt={data?.name} className="absolute inset-0 object-cover rounded-full ring-2 ring-brand" />
             </div>
             <div>
               <h2 className="font-semibold text-black">
-                Customer Name
+              {data?.name}
               </h2>
               <p className="text-brand text-sm flex items-center gap-2">
                 <svg
@@ -73,18 +73,18 @@ export default function CustomerCard() {
           </div>
         </div>
         <div className="w-1/4">
-          <p className="text-gray-500 text-xs">City</p>
-          <p className="text-brand text-sm font-bold mb-2">Rajshahi</p>
-          <p className="text-gray-500 text-xs">State</p>
-          <p className="text-brand text-sm font-bold">Bangladesh</p>
+          <p className="text-gray-500 text-xs">Address</p>
+          <p className="text-brand text-sm font-bold mb-2">{data?.address}</p>
+          <p className="text-gray-500 text-xs">Email</p>
+          <p className="text-brand text-sm font-bold">{data?.email}</p>
         </div>
         <div className="w-1/4">
           <p className="text-gray-500 text-xs">Registered at</p>
           <p className="text-brand text-sm font-bold mb-2">
-            20 Oct, 2023 at 04.00pm
+            {formatDate(data?.createdAt)}
           </p>
-          <p className="text-gray-500 text-xs">Availability</p>
-          <p className="text-brand text-sm font-bold mb-2">Available</p>
+          <p className="text-gray-500 text-xs">Contact</p>
+          <p className="text-brand text-sm font-bold mb-2">{data?.contact_no}</p>
         </div>
       </div>
     </>
