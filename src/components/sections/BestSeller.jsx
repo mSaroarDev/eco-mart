@@ -21,7 +21,7 @@ export default async function BestSellerSection() {
     }
   })
 
-  // product
+  // related product
   const relatedProducts = await prisma.products.findMany({
     orderBy: {
       serial: "desc"

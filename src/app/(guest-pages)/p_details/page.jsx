@@ -9,6 +9,7 @@ import Topbar from "@/components/sections/Topbar";
 import prisma from "@/lib/db";
 
 export default async function ProductDetailsPage({ searchParams }) {
+
   // grab the id
   const product_id = searchParams.p_id;
 
@@ -18,6 +19,25 @@ export default async function ProductDetailsPage({ searchParams }) {
       id: product_id,
     },
   });
+
+  // products fetch
+  const recentProducts = await prisma.products.findMany({
+    where: {
+      category_id: productDetails?.category_id
+    },
+    take: 4,
+    orderBy: {
+      serial: "desc"
+    }
+  })
+
+  // related product
+  const relatedProducts = await prisma.products.findMany({
+    orderBy: {
+      serial: "desc"
+    }
+  });
+  const productsToShow = relatedProducts.slice(0, 8)
 
   return (
     <>
@@ -63,7 +83,7 @@ export default async function ProductDetailsPage({ searchParams }) {
               </div>
             </div>
           </div>
-          <div className="col-span-12 lg:col-span-3 border-[1px] border-gray-300 bg-white">
+          <div className="col-span-12 lg:col-span-3 border-[1px] border-gray-300 bg-white h-fit">
             <div className="bg-gray-200 p-3 text-left uppercase text-base font-medium">
               Best Sales Today
             </div>
@@ -71,12 +91,9 @@ export default async function ProductDetailsPage({ searchParams }) {
             {/* products */}
             <div className="flex flex-col gap-3">
               <div className="w-full p-4">
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
+              {productsToShow && productsToShow.map((product)=> {
+                  return <TodayBestSalesProducts key={product?.id} data={product} />
+                })}
               </div>
             </div>
           </div>
@@ -92,10 +109,9 @@ export default async function ProductDetailsPage({ searchParams }) {
 
               <div className="__products w-full p-5">
                 <div className="grid grid-cols-12">
-                  <ProductCard />
-                  <ProductCard />
-                  <ProductCard />
-                  <ProductCard />
+                  {recentProducts && recentProducts.map((product)=> {
+                    return <ProductCard key={product?.serial} data={product} />
+                  })}
                 </div>
               </div>
             </div>
