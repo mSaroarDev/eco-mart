@@ -1,14 +1,24 @@
 import Appnav from "@/components/Appnav";
 import Menubar from "@/components/MenuBar";
 import ProductCard from "@/components/ProductCard";
-import RelatedTodayProduct from "@/components/RelatedTodayProduct";
 import StickyMenu from "@/components/StickyMenu";
 import TodayBestSalesProducts from "@/components/TodayBestSaleProduct";
 import TodaysDeals from "@/components/TodaysDeals";
 import Footer from "@/components/sections/Footer";
 import Topbar from "@/components/sections/Topbar";
+import prisma from "@/lib/db";
 
-export default function ProductDetailsPage() {
+export default async function ProductDetailsPage({ searchParams }) {
+  // grab the id
+  const product_id = searchParams.p_id;
+
+  // product data fetch
+  const productDetails = await prisma.products.findUnique({
+    where: {
+      id: product_id,
+    },
+  });
+
   return (
     <>
       <Topbar />
@@ -26,7 +36,7 @@ export default function ProductDetailsPage() {
           <div className="col-span-12 lg:col-span-9 border-[1px] border-gray-300">
             <div className="w-full">
               {/* todays deals card */}
-              <TodaysDeals />
+              <TodaysDeals data={productDetails} />
 
               <hr className="m-3" />
 
@@ -42,27 +52,14 @@ export default function ProductDetailsPage() {
 
               {/* datails */}
               <div className="p-10">
-                <h3 className="text-lg font-bold underline mb-5">Description</h3>
-                What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
-                printing and typesetting industry. Lorem Ipsum has been the
-                industrys standard dummy text ever since the 1500s, when an
-                unknown printer took a galley of type and scrambled it to make a
-                type specimen book. It has survived not only five centuries, but
-                also the leap into electronic typesetting, remaining essentially
-                unchanged. It was popularised in the 1960s with the release of
-                Letraset sheets containing Lorem Ipsum passages, and more
-                recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum. Why do we use it? It is a
-                long established fact that a reader will be distracted by the
-                readable content of a page when looking at its layout. The point
-                of using Lorem Ipsum is that it has a more-or-less normal
-                distribution of letters, as opposed to using Content here,
-                content here, making it look like readable English. Many desktop
-                publishing packages and web page editors now use Lorem Ipsum as
-                their default model text, and a search for lorem ipsum will
-                uncover many web sites still in their infancy. Various versions
-                have evolved over the years, sometimes by accident, sometimes on
-                purpose (injected humour and the like).
+                <h3 className="text-lg font-bold underline mb-5">
+                  Description
+                </h3>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: productDetails?.description,
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -82,30 +79,28 @@ export default function ProductDetailsPage() {
                 <TodayBestSalesProducts />
               </div>
             </div>
-
-            
           </div>
         </div>
 
         {/* related products */}
         <div className="py-14">
-        <div className="w-full max-w-6xl mx-auto">
-          <div className="border-[1px] border-gray-300 bg-white">
-            <div className="__heading ml-2 bg-brand text-white text-md font-semibold uppercase py-2 px-8 w-fit rounded-b-lg">
-              Related Products
-            </div>
+          <div className="w-full max-w-6xl mx-auto">
+            <div className="border-[1px] border-gray-300 bg-white">
+              <div className="__heading ml-2 bg-brand text-white text-md font-semibold uppercase py-2 px-8 w-fit rounded-b-lg">
+                Related Products
+              </div>
 
-            <div className="__products w-full p-5">
-              <div className="grid grid-cols-12">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+              <div className="__products w-full p-5">
+                <div className="grid grid-cols-12">
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
 
       {/* footer */}

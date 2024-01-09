@@ -8,7 +8,7 @@ export default function ProductCard({data}) {
       <div className="p-3 flex items-center gap-3 w-full border-t-[1px] border-gray-300">
         <div className="w-2/4">
           <div className="w-full flex items-center justify-start gap-4">
-            <Image src="/bag.jpg" height={100} width={100} alt="Bag" />
+            <Image src={data?.product_image} height={100} width={100} alt="Bag" />
             <div>
               <h2 className="font-semibold text-black">
                 <Link href={`/p_details?p_=${data?.product_name}&p_id=${data?.id}`} className="hover:underline">

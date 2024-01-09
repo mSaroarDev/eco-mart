@@ -64,6 +64,7 @@ model products {
   short_des       String   @db.LongText
   regular_price   String?
   price           String
+  discount        String
   description     String   @db.LongText
   product_image   String
   image_public_id String

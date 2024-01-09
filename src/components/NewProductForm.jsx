@@ -71,7 +71,6 @@ export default function NewProductForm({ categories }) {
 
   // description value
   const [description, setDescription] = useState("");
-  const [shorDes, setShortDes] = useState("")
 
   // formik
   const formik = useFormik({
@@ -81,6 +80,7 @@ export default function NewProductForm({ categories }) {
       short_des: "",
       regular_price: "",
       price: "",
+      discount: "",
       description: "",
       product_image: "",
       image_public_id: "",
@@ -96,6 +96,7 @@ export default function NewProductForm({ categories }) {
         short_des,
         regular_price,
         price,
+        discount,
         description,
         product_image,
         image_public_id,
@@ -151,7 +152,7 @@ export default function NewProductForm({ categories }) {
             />
           </div>
 
-          <div className="col-span-4 login w-full">
+          <div className="col-span-3 login w-full">
             <label htmlFor="product_name">Regular Price</label> <br />
             <input
               type="text"
@@ -163,7 +164,7 @@ export default function NewProductForm({ categories }) {
             />
           </div>
 
-          <div className="col-span-4 login w-full">
+          <div className="col-span-3 login w-full">
             <label htmlFor="product_name">
               Offer Price <span className="text-xs text-red-500"> *</span>
             </label>{" "}
@@ -178,7 +179,19 @@ export default function NewProductForm({ categories }) {
             />
           </div>
 
-          <div className="col-span-4 login w-full">
+          <div className="col-span-3 login w-full">
+            <label htmlFor="product_name">Discount (%) <span className="text-xs text-red-500"> *</span></label> <br />
+            <input
+              type="text"
+              id="discount"
+              name="discount"
+              value={formik.values.discount}
+              onChange={formik.handleChange}
+              className="login-input w-full"
+            />
+          </div>
+
+          <div className="col-span-3 login w-full">
             <label htmlFor="product_name">
               Ratings <span className="text-xs text-red-500"> *</span>
             </label>{" "}
