@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Ratings from "./Ratings";
 
-export default function TodaysDeals({data}) {
+export default function TodaysDeals({ data }) {
   return (
     <>
       <div className="__product px-10 py-3 flex flex-wrap lg:flex-nowrap items-center justify-start gap-5">
@@ -20,18 +20,25 @@ export default function TodaysDeals({data}) {
 
         <div className="p-3 lg:p-10">
           <h1 className="text-xl text-black font-semibold">
-            <Link href={"/p_details"} className="hover:underline">
+            <Link
+              href={`/p_details?p_=${data?.product_name}&p_id=${data?.id}`}
+              className="hover:underline"
+            >
               {data?.product_name}
             </Link>
           </h1>
-            <p className="text-gray-600 mt-5">Ratings: {data?.ratings}/5</p>
+          <p className="text-gray-600 mt-5">Ratings: {data?.ratings}/5</p>
           <hr className="my-3" />
-          <p className="text-gray-400 text-sm">
-            {data?.short_des}
-          </p>
+          <p className="text-gray-400 text-sm">{data?.short_des.slice(0, 250)}...</p>
           <div className="my-5 flex items-center justify-start gap-3">
-            <div className="text-brand text-2xl font-semibold">${data?.price}</div>
-            {!data?.regular_price == "" && <div className="text-gray-400 text-base line-through">${data?.regular_price}</div>}
+            <div className="text-brand text-2xl font-semibold">
+              ${data?.price}.00
+            </div>
+            {!data?.regular_price == "" && (
+              <div className="text-gray-400 text-base line-through">
+                ${data?.regular_price}.00
+              </div>
+            )}
           </div>
           <button className="my-3 bg-brand text-white px-5 py-2">
             Add to Cart

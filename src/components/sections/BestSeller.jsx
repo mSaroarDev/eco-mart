@@ -3,8 +3,33 @@ import TodaysDeals from "../TodaysDeals";
 import RelatedTodayProduct from "../RelatedTodayProduct";
 import Link from "next/link";
 import TodayBestSalesProducts from "../TodayBestSaleProduct";
+import prisma from "@/lib/db";
 
-export default function BestSellerSection() {
+export default async function BestSellerSection() {
+
+  // today deals product
+  const todayDeal = await prisma.today_deals.findFirst({
+    orderBy: {
+      serial: "desc"
+    }
+  })
+
+  // product
+  const product = await prisma.products.findUnique({
+    where: {
+      id: todayDeal.product_id
+    }
+  })
+
+  // product
+  const relatedProducts = await prisma.products.findMany({
+    orderBy: {
+      serial: "desc"
+    }
+  });
+  const productsToShow = relatedProducts.slice(0, 4)
+
+
   return (
     <>
       <div className="w-full max-w-6xl mx-auto p-5">
@@ -16,19 +41,17 @@ export default function BestSellerSection() {
               </div>
 
               {/* todays deals card */}
-              <TodaysDeals />
-
-              <hr className="m-3" />
+              <TodaysDeals data={product} />
 
               {/* related products */}
-              <div className="__related_products px-10 py-2">
+              {/* <div className="__related_products px-10 py-2">
                 <div className="grid grid-cols-12 gap-3">
                   <RelatedTodayProduct />
                   <RelatedTodayProduct />
                   <RelatedTodayProduct />
                   <RelatedTodayProduct />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-span-12 lg:col-span-3 border-[1px] border-gray-300 bg-white">
@@ -39,12 +62,9 @@ export default function BestSellerSection() {
             {/* products */}
             <div className="flex flex-col gap-3">
               <div className="w-full p-4">
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
-                <TodayBestSalesProducts />
+                {productsToShow && productsToShow.map((product)=> {
+                  return <TodayBestSalesProducts key={product?.id} data={product} />
+                })}
               </div>
             </div>
           </div>

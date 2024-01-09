@@ -5,7 +5,7 @@ export default function CategoryList({ data }) {
   return (
     <>
       <Link
-        href={`/category/products?category=${data?.category_name}&category_id=${data?.id}`}
+        href={`/products?category=${data?.category_name}&category_id=${data?.id}`}
         className="flex items-center gap-3 px-5 hover:text-brand duration-300"
       >
         <Image

@@ -4,8 +4,7 @@ import CategoryCard from "@/components/saler/CategoryCard";
 import CustomerCard from "@/components/saler/Customers";
 import prisma from "@/lib/db";
 
-export default async function CategoriesPage({searchParams}) {
-
+export default async function CategoriesPage({ searchParams }) {
   // grab page no
   const page = searchParams.page;
 
@@ -13,6 +12,9 @@ export default async function CategoriesPage({searchParams}) {
   const categories = await prisma.categories.findMany({
     skip: (page - 1) * 10,
     take: 10,
+    orderBy: {
+      serial: "desc",
+    },
   });
 
   // category count

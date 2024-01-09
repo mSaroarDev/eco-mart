@@ -4,7 +4,7 @@ export default function MyProfileForm({profileData}) {
   
   return (
     <>
-      <div className="w-[250px] bg-white fixed right-4 top-4 bottom-4 shadow-md rounded-md p-3">
+      <div className="w-[250px] bg-white fixed right-4 top-4 bottom-4 shadow-md rounded-md p-3 z-10">
         <div className="flex flex-col items-start justify-between h-full w-full">
           <form className="w-full">
             <h2 className="text-base font-semibold">My Profile</h2>

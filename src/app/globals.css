@@ -125,7 +125,7 @@ img.vert-move {
   right: 0;
   backdrop-filter: blur(1px); /* Adjust the blur intensity as needed */
   background-color: rgba(0, 0, 0, 0.5);
-  @apply z-50
+  z-index: 99999;
 }
 
 .popup-box {

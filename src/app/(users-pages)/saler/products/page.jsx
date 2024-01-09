@@ -14,7 +14,10 @@ export default async function ProductsPage({searchParams}) {
   // products
   const products = await prisma.products.findMany({
     skip: (page_no - 1) * 10,
-    take: 10
+    take: 10,
+    orderBy: {
+      serial: "desc"
+    }
   })
 
   // total products
