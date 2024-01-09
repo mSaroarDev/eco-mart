@@ -1,27 +1,27 @@
 import Image from "next/image";
 
-export default function ProductCard() {
+export default function ProductCard({data}) {
   return (
     <>
       <div className="col-span-12 lg:col-span-3">
         <div className="border-[1px] border-gray-300 p-5 w-full">
           <div className="__image w-full h-[200px] relative">
             <div className="bg-brand text-white text-xs w-10 h-10 p-3 rounded-full absolute -top-2 -right-2 flex items-center justify-center z-10">
-              -20%
+              -{data?.discount}%
             </div>
             <Image
-              src="/fashion.jpg"
+              src={data?.product_image}
               fill
-              alt="bag"
+              alt={data?.product_name}
               className="absolute inset-0 object-cover"
             />
           </div>
           <h2 className="text-base font-medium text-gray-500 text-center my-1">
-            Arctic Hunter Bag
+            {data?.product_name}
           </h2>
           <div className="flex items-center justify-center gap-3">
-            <div className="text-brand font-medium">$360.00</div>
-            <div className="text-gray-400 line-through text-xs">$480.00</div>
+            <div className="text-brand font-medium">${data?.price}.00</div>
+            <div className="text-gray-400 line-through text-xs">${data?.regular_price}.00</div>
           </div>
 
           <div className="flex items-center justify-center gap-3">

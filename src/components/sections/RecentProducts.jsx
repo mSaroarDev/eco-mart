@@ -1,6 +1,17 @@
+import prisma from "@/lib/db";
 import ProductCard from "../ProductCard";
 
-export default function RecentProductsSection() {
+export default async function RecentProductsSection() {
+
+  // products fetch
+  const products = await prisma.products.findMany({
+    orderBy: {
+      serial: "desc"
+    },
+    take: 8
+  })
+
+
   return (
     <>
       <div className="py-14">
@@ -12,6 +23,7 @@ export default function RecentProductsSection() {
 
             <div className="__products w-full p-5">
               <div className="grid grid-cols-12">
+                {}
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
