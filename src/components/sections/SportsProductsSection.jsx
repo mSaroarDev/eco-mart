@@ -1,6 +1,22 @@
+import prisma from "@/lib/db";
 import ProductCard from "../ProductCard";
 
-export default function SportsProductsSection() {
+export default async function SportsProductsSection() {
+
+  // products fetch
+  const products = await prisma.products.findMany({
+    where: {
+      category_name: {
+        contains: "Sport"
+      }
+    },
+    orderBy: {
+      serial: "desc"
+    },
+    take: 8
+  })
+
+
   return (
     <>
       <div className="py-14">
@@ -12,14 +28,9 @@ export default function SportsProductsSection() {
 
             <div className="__products w-full p-5">
               <div className="grid grid-cols-12">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+              {products && products.map((product)=> {
+                  return <ProductCard key={product.serial} data={product} />
+                })}
               </div>
             </div>
           </div>

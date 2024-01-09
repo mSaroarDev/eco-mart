@@ -8,7 +8,7 @@ export default async function RecentProductsSection() {
     orderBy: {
       serial: "desc"
     },
-    take: 8
+    take: 12
   })
 
 
@@ -23,15 +23,10 @@ export default async function RecentProductsSection() {
 
             <div className="__products w-full p-5">
               <div className="grid grid-cols-12">
-                {}
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                {products && products.map((product)=>{
+                  return <ProductCard key={product.serial} data={product} />
+                })}
+                
               </div>
             </div>
           </div>
