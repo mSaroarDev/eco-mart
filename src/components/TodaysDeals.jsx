@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function TodaysDeals() {
   return (
@@ -18,7 +19,9 @@ export default function TodaysDeals() {
 
         <div className="p-3 lg:p-10">
           <h1 className="text-xl text-black font-semibold">
-            Arctic Hunter Backpack
+            <Link href={"/p_details"} className="hover:underline">
+              Arctic Hunter Backpack
+            </Link>
           </h1>
           <div className="text-brand flex mt-5 gap-1">
             <Image src="/favorite.png" height={13} width={13} alt="start" />

@@ -2,9 +2,24 @@ import OrderCart from "@/components/OrderCart";
 import Paggination from "@/components/Paggination";
 import OrderCard from "@/components/saler/OrderCard";
 import ProductCard from "@/components/saler/ProductCard";
+import prisma from "@/lib/db";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function ProductsPage() {
+export default async function ProductsPage({searchParams}) {
+
+  // page
+  const page_no = searchParams.page;
+
+  // products
+  const products = await prisma.products.findMany({
+    skip: (page_no - 1) * 10,
+    take: 10
+  })
+
+  // total products
+  const totalProducts = await prisma.products.count()
+
   return (
     <>
       <div>
@@ -41,7 +56,7 @@ export default function ProductsPage() {
                   </svg>
                 </button>
               </div>
-              <button className="bg-brand text-white px-4 py-2 rounded-full flex items-center justify-center gap-2">
+              <Link href={"/saler/products/new"} className="bg-brand text-white px-4 py-2 rounded-full flex items-center justify-center gap-2">
                 <span className="text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +74,7 @@ export default function ProductsPage() {
                   </svg>
                 </span>
                 <span className="text-sm uppercase">Add New Product</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -67,14 +82,13 @@ export default function ProductsPage() {
         {/* orders */}
         <div className="__orders">
           <div className="flex flex-col gap-3">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {products && products.map((product)=> {
+              return <ProductCard key={product.serial} data={product} />
+            })}
           </div>
         </div>
         <div className="p-5 border-t-[1px] border-gray-300 flex items-center justify-end">
-          <Paggination count={100} nextLink={"/users/my-orders"} />
+          <Paggination count={totalProducts} nextLink={"/saler/products"} />
         </div>
       </div>
     </>

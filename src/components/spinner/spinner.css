@@ -3,11 +3,10 @@
   height: 60px;
   border-radius: 50%;
   display: inline-block;
-  border-top: 2px solid #FF3D00;
+  border-top: 3px solid #FF3D00;
   border-right: 2px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
-  z-index: 9999;
 }
 
 .overlay {
@@ -18,6 +17,7 @@
   right: 0;
   backdrop-filter: blur(.5px); /* Adjust the blur intensity as needed */
   background-color: rgba(0, 0, 0, 0.01); 
+  z-index: 9999;
 }
 
 @keyframes rotation {
