@@ -8,20 +8,22 @@ export default async function LoggedRedirect() {
   // session
   const session = await getServerSession(authOptions);
 
-  // get profile info
-  const userInfo = await prisma.users.findUnique({
-    where: {
-      email: session?.user?.email,
-    },
-  });
-
   // redirect
   if (!session) {
     redirect("/sign-in");
-  } else if (userInfo?.role === "Buyer") {
-    redirect("/users/dashboard");
-  } else if (userInfo?.role === "Saler") {
-    redirect("/saler/dashboard");
+  } else {
+    // get profile info
+    const userInfo = await prisma.users.findUnique({
+      where: {
+        email: session?.user?.email,
+      },
+    });
+
+    if (userInfo?.role === "Buyer") {
+      redirect("/users/dashboard");
+    } else if (userInfo?.role === "Saler") {
+      redirect("/saler/dashboard");
+    }
   }
 
   return (

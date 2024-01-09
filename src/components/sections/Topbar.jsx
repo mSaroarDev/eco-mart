@@ -1,6 +1,12 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Topbar() {
+
+    // session
+    const session = useSession();
+
   return (
     <>
       <div className="bg-gray-100 px-5 py-2 hidden lg:block">
@@ -13,7 +19,29 @@ export default function Topbar() {
           </div>
           <div>
             <ul className="flex gap-4 items-center font-bebas">
-              <li>
+              {session ? <li>
+                <Link
+                  className="flex items-center gap-1 hover:underline text-black"
+                  href={"/logged"}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                    />
+                  </svg>
+
+                  <span className="text-gray-500">My Profile</span>
+                </Link>
+              </li> : <li>
                 <Link
                   className="flex items-center gap-1 hover:underline text-black"
                   href={"/sign-in"}
@@ -35,7 +63,8 @@ export default function Topbar() {
 
                   <span className="text-gray-500">Sign In</span>
                 </Link>
-              </li>{" "}
+              </li> } {" "}
+              
               |
               <li className="flex items-center gap-1 hover:underline">
                 <svg
