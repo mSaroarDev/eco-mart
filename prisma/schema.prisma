@@ -91,14 +91,12 @@ model orders {
   updatedAt  DateTime @default(now()) @updatedAt
 }
 
-model order_items {
-  id          String   @id @default(cuid())
-  serial      Int      @unique @default(autoincrement())
-  order_id    String
-  product_id  String
-  unit_price  String
-  quantity    String
-  total_price String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
+model cart {
+  id         String   @id @default(cuid())
+  serial     Int      @unique @default(autoincrement())
+  created_by String
+  product_id String
+  quantity   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 }

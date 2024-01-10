@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Ratings from "./Ratings";
+import TodayDealsAddtoCartButton from "./TodayDealsAddtoCartButton";
 
 export default function TodaysDeals({ data }) {
   return (
@@ -40,9 +41,7 @@ export default function TodaysDeals({ data }) {
               </div>
             )}
           </div>
-          <button className="my-3 bg-brand text-white px-5 py-2">
-            Add to Cart
-          </button>
+          <TodayDealsAddtoCartButton productId={data?.id} />
         </div>
       </div>
     </>

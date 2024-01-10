@@ -2,10 +2,34 @@ import Appnav from "@/components/Appnav";
 import CartItemList from "@/components/CartItemList";
 import Menubar from "@/components/MenuBar";
 import StickyMenu from "@/components/StickyMenu";
+import prisma from "@/lib/db";
+import { authOptions } from "@/utils/authoptions";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CartPage() {
+export default async function CartPage() {
+
+  // user info
+  const session = await getServerSession(authOptions);
+  const user = await prisma.users.findUnique({
+    where: {
+      email: session?.user?.email
+    }
+  })
+
+  // cart data fetch
+  const cartItems = await prisma.cart.findMany({
+    where: {
+      created_by: user?.id,
+    },
+    orderBy: {
+      serial: "desc"
+    }
+  })
+
+
+
   return (
     <>
       <Appnav />
@@ -19,7 +43,7 @@ export default function CartPage() {
         <div className="p-10">
           <div className="text-center">
             <h2 className="text-xl font-medium">
-              Your Shopping Cart (3 items)
+              Your Shopping Cart ({cartItems.length} items)
             </h2>
           </div>
 
@@ -33,8 +57,9 @@ export default function CartPage() {
             </div>
 
             {/* items list */}
-            <CartItemList />
-            <CartItemList />
+            {cartItems && cartItems.map((item)=> {
+              return <CartItemList key={item.serial} data={item} />
+            })}
 
             {/* total calculation */}
             <div className="grid grid-cols-12 bg-white p-7">
