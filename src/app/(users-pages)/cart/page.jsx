@@ -5,7 +5,6 @@ import StickyMenu from "@/components/StickyMenu";
 import prisma from "@/lib/db";
 import { authOptions } from "@/utils/authoptions";
 import { getServerSession } from "next-auth";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function CartPage() {
@@ -27,6 +26,9 @@ export default async function CartPage() {
       serial: "desc"
     }
   })
+
+  // total calculation
+  
 
 
 
