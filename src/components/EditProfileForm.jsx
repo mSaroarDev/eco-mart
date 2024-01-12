@@ -27,7 +27,6 @@ export default function EditProfileForm({ action, data }) {
       contact_no: data?.contact_no,
     },
     onSubmit: async (values) => {
-      console.log(values);
     },
   });
 

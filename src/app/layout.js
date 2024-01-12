@@ -2,6 +2,7 @@ import Toploader from "@/components/TopLoading";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import AuthProvider from "@/utils/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Create Next App",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`min-h-screen bg-gray-50 ${inter.className}`}>
         <Toploader />
+        <Toaster />
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

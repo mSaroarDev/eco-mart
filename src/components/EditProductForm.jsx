@@ -4,13 +4,13 @@ import { CldUploadButton } from "next-cloudinary";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import Spinner from "./spinner/Spinner";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function NewProductForm({ categories }) {
+export default function EditProductForm({ categories, product }) {
 
   // loading
   const [loading, setLoading] = useState(false);
@@ -72,22 +72,29 @@ export default function NewProductForm({ categories }) {
   // description value
   const [description, setDescription] = useState("");
 
+  // description and image
+  useEffect(()=> {
+    setDescription(product?.description);
+    setImgUrl(product?.product_image);
+    setPublicId(product?.image_public_id)
+  }, [])
+
   // formik
   const formik = useFormik({
     initialValues: {
-      product_name: "",
-      ratings: "",
-      short_des: "",
-      regular_price: "",
-      price: "",
-      discount: "",
-      description: "",
-      product_image: "",
-      image_public_id: "",
-      category_id: "",
-      category_name: "",
-      availability: "",
-      status: "",
+      product_name: product?.product_name,
+      ratings: product?.ratings,
+      short_des: product?.short_des,
+      regular_price: product?.regular_price,
+      price: product?.price,
+      discount: product?.discount,
+      description: product?.description,
+      product_image: product?.product_image,
+      image_public_id: product?.image_public_id,
+      category_id: product?.category_id,
+      category_name: product?.category_name,
+      availability: product?.availability,
+      status: product?.status,
     },
 
     onSubmit: async (values, { resetForm }) => {
@@ -108,7 +115,7 @@ export default function NewProductForm({ categories }) {
         showError("All fields required.")
       } else {
         setLoading(true);
-        const res = await fetch("/api/product/new", {
+        const res = await fetch(`/api/product/edit?pid=${product?.id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -118,13 +125,13 @@ export default function NewProductForm({ categories }) {
 
         setLoading(false);
         if(res.status === 201){
-          showSuccess("New product added.");
+          showSuccess("Product added succesfully.");
           router.refresh();
           setTimeout(() => {
             router.push("/saler/products?page=1")
           }, 1500);
         }else{
-          showError("Failed to add product.")
+          showError("Failed to edit product.")
         }
       }
     },
@@ -184,12 +191,14 @@ export default function NewProductForm({ categories }) {
               type="text"
               id="price"
               name="price"
-              placeholder={`after dis: ${parseInt(formik.values.regular_price) - parseInt(formik.values.regular_price) * parseInt(formik.values.discount) / 100 || 0 }`}
+              placeholder={`after dis: ${parseInt(formik.values.regular_price) - parseInt(formik.values.regular_price) * parseInt(formik.values.discount) / 100 || 0}`}
               value={formik.values.price}
               onChange={formik.handleChange}
               className="login-input w-full"
             />
           </div>
+
+          
 
           <div className="col-span-3 login w-full">
             <label htmlFor="product_name">

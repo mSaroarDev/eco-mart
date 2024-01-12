@@ -10,7 +10,6 @@ cloudinary.v2.config({
 const removeImage = async (publicId) => {
   try {
     await cloudinary.v2.uploader.destroy(publicId);
-    console.log("publicId", publicId);
   } catch (error) {
     console.log(error);
   }
