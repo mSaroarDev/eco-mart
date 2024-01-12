@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function PaymentPage() {
   return (
@@ -90,12 +91,13 @@ export default function PaymentPage() {
             </div>
 
             <div className="col-span-12">
-              <button
+              <Link
+              href={"/payment-success"}
                 type="submit"
-                className="bg-[#005C9D] py-3 w-full uppercase text-white rounded-md mt-3"
+                className="bg-[#005C9D] py-3 w-full uppercase text-white rounded-md mt-3 text-center"
               >
                 Pay Now
-              </button>
+              </Link>
             </div>
           </div>
         </div>

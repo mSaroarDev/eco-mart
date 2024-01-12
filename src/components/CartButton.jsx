@@ -1,11 +1,75 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodayBestSalesProducts from "./TodayBestSaleProduct";
 import CartItem from "./CartItem";
 import Link from "next/link";
+import { getCartItems } from "@/utils/getCartItems";
+import { useRouter } from "next/navigation";
+import priceFixed from "@/utils/priceFixed";
+import { removeCart } from "@/utils/removeCart";
+import toast from "react-hot-toast";
 
 export default function CartButton() {
   const [showCart, setShowCart] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const [batchItemCount, setBatchItemCount] = useState(0);
+
+  // prev cart
+
+
+  // toast
+  const showSuccess = (m) => toast.success(m);
+  const showError = (m) => toast.error(m);
+
+  // loading
+  const [loading, setLoading] = useState(false)
+
+  // data
+  const [items, setItems] = useState();
+
+  // total price
+  const [totalPrice, setTotalPrice] = useState(0)
+
+  // data fetch
+  const fetchCartItems = () => {
+    getCartItems()
+      .then((data) => {
+        setItems(data);
+        setCartItemCount(data.length);
+        setBatchItemCount(data.length);
+
+        const totalPrice = data.reduce((total, currentValue) => {
+          const itemTotal = parseInt(currentValue.total_price) || 0;
+          return total + itemTotal;
+        }, 0);
+
+        setTotalPrice(totalPrice)
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // refresh
+  const router = useRouter()
+  useEffect(() => {
+    fetchCartItems();
+  }, [showCart]);
+
+  // remove cart
+  const removeItem = (cartId) => {
+    setLoading(true);
+    removeCart(cartId)
+      .then((data) => {
+        setLoading(false);
+        showSuccess("Product removed from cart.");
+        router.refresh();
+      })
+      .catch((err) => {
+        setLoading(false);
+        showError("Product remove failed.");
+      });
+
+      fetchCartItems()
+  };
 
   return (
     <>
@@ -15,7 +79,7 @@ export default function CartButton() {
           className="w-fit h-fit bg-white text-black p-2 rounded-full cursor-pointer relative"
         >
           <span className="bg-black text-white text-sm w-6 h-6 rounded-full leading-6 text-center absolute -top-2 -right-2">
-            0
+            {batchItemCount}
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,9 +116,9 @@ export default function CartButton() {
 
               {/* cart items */}
               <div className="flex flex-col">
-                <CartItem />
-                <CartItem />
-                <CartItem />
+                {items == undefined ? <p>Loading...</p> : items.map((item)=> {
+                  return <CartItem key={item.serial} data={item} removeAction={() => removeItem(item?.id)} />
+                })}
               </div>
               <hr className="my-5" />
 
@@ -62,8 +126,8 @@ export default function CartButton() {
                 <p className="text-base font-semibold text-gray-600">
                   Subtotal:
                 </p>
-                <p className="text-base text-gray-600">x3 items</p>
-                <p className="text-base text-gray-600">$100.00</p>
+                <p className="text-base text-gray-600">x{cartItemCount} items</p>
+                <p className="text-base text-gray-600">{priceFixed(totalPrice)}</p>
               </div>
 
               <Link

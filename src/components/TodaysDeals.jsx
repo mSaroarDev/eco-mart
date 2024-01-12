@@ -41,7 +41,7 @@ export default function TodaysDeals({ data }) {
               </div>
             )}
           </div>
-          <TodayDealsAddtoCartButton productId={data?.id} />
+          <TodayDealsAddtoCartButton productId={data?.id} price={data?.price} />
         </div>
       </div>
     </>

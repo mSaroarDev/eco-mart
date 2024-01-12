@@ -18,6 +18,10 @@ export async function POST(req) {
   const { searchParams } = new URL(req.url);
   const product_id = searchParams.get("p_id");
   const qty = searchParams.get("p_qty");
+  const price = searchParams.get("price");
+
+  // total
+  const total = parseInt(price) * parseInt(qty);
 
   try {
     const product = await prisma.cart.create({
@@ -25,6 +29,7 @@ export async function POST(req) {
         created_by: user?.id,
         product_id: product_id,
         quantity: qty,
+        total_price: total,
       },
     });
 

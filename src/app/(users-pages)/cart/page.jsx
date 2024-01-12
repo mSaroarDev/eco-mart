@@ -28,7 +28,13 @@ export default async function CartPage() {
   })
 
   // total calculation
-  
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, currentValue) => {
+      const itemTotal = parseInt(currentValue.total_price) || 0;
+      return total + itemTotal;
+    }, 0);
+  }
+
 
 
 
@@ -69,11 +75,11 @@ export default async function CartPage() {
               <div className="col-span-12 lg:col-span-6 w-full flex flex-col">
                 <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                   <p className="text-gray-800 font-medium">Subtotal</p>
-                  <p className="text-black text-sm">$500.00</p>
+                  <p className="text-black text-sm">${calculateTotalPrice()}.00</p>
                 </div>
                 <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                   <p className="text-gray-800 font-medium">Vat (2%)</p>
-                  <p className="text-black text-sm">$10.00</p>
+                  <p className="text-black text-sm">$2.00</p>
                 </div>
                 <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                   <p className="text-gray-800 font-medium">Discount</p>
@@ -82,11 +88,11 @@ export default async function CartPage() {
 
                 <div className="flex items-center justify-between mt-5 py-2">
                   <p className="text-gray-800 font-bold text-lg">Gross Total</p>
-                  <p className="text-black font-bold text-lg">$510.00</p>
+                  <p className="text-black font-bold text-lg">${calculateTotalPrice() + calculateTotalPrice() * (2/100)}</p>
                 </div>
 
                 <Link
-                  href={"/checkout"}
+                  href={"/payment"}
                   className="w-full bg-brand text-white p-2 text-center flex items-center justify-center gap-3 mt-5"
                 >
                   <span>Checkout</span>

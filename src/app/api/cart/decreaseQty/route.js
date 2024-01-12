@@ -6,10 +6,10 @@ export async function POST(req) {
   const qty = searchParams.get("qty");
   const pid = searchParams.get("pid");
   const cid = searchParams.get("cid");
+  const price = searchParams.get("price");
 
-  console.log("cid", cid);
-  console.log("pid", pid);
-  console.log("qty", qty);
+  // total
+  const total = parseInt(price) * parseInt(qty);
 
   try {
     const res = await prisma.cart.update({
@@ -19,6 +19,7 @@ export async function POST(req) {
       data: {
         product_id: pid,
         quantity: qty,
+        total_price: total,
       },
     });
 

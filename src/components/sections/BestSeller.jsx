@@ -17,7 +17,7 @@ export default async function BestSellerSection() {
   // product
   const product = await prisma.products.findUnique({
     where: {
-      id: todayDeal.product_id
+      id: todayDeal?.product_id
     }
   })
 

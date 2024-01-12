@@ -5,7 +5,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Spinner from "./spinner/Spinner";
 
-export default function TodayDealsAddtoCartButton({productId}){
+export default function TodayDealsAddtoCartButton({productId, price}){
 
   // route
   const router = useRouter()
@@ -24,7 +24,7 @@ export default function TodayDealsAddtoCartButton({productId}){
 
   const addToCart = () => {
     setLoading(true);
-    createCart(productId, qty)
+    createCart(productId, qty, price)
     .then((data)=> {
       setLoading(false);
       showSuccess("Product added to cart.")

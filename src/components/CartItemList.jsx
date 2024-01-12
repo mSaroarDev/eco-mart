@@ -60,7 +60,7 @@ export default function CartItemList({ data }) {
   // product increase
   const IncreaseProduct = async () => {
     setCount(parseInt(count) + parseInt(1));
-      const res = await fetch(`/api/cart/increaseQty?cid=${cartId}&pid=${data?.product_id}&qty=${parseInt(count) + 1}`, {
+      const res = await fetch(`/api/cart/increaseQty?cid=${cartId}&pid=${data?.product_id}&qty=${parseInt(count) + 1}&price=${product?.price}`, {
         method: "POST"
       });
 
@@ -74,7 +74,7 @@ export default function CartItemList({ data }) {
   // product decrease
   const DecreaseProduct = async () => {
     setCount(parseInt(count) - parseInt(1));
-      const res = await fetch(`/api/cart/decreaseQty?cid=${cartId}&pid=${data?.product_id}&qty=${parseInt(count) - 1}`, {
+      const res = await fetch(`/api/cart/decreaseQty?cid=${cartId}&pid=${data?.product_id}&qty=${parseInt(count) - 1}&price=${product?.price}`, {
         method: "POST"
       });
 
