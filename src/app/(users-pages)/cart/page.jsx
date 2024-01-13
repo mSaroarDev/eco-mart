@@ -1,5 +1,6 @@
 import Appnav from "@/components/Appnav";
 import CartItemList from "@/components/CartItemList";
+import CheckOutButton from "@/components/CheckoutButton";
 import Menubar from "@/components/MenuBar";
 import StickyMenu from "@/components/StickyMenu";
 import prisma from "@/lib/db";
@@ -8,14 +9,13 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 export default async function CartPage() {
-
   // user info
   const session = await getServerSession(authOptions);
   const user = await prisma.users.findUnique({
     where: {
-      email: session?.user?.email
-    }
-  })
+      email: session?.user?.email,
+    },
+  });
 
   // cart data fetch
   const cartItems = await prisma.cart.findMany({
@@ -23,9 +23,9 @@ export default async function CartPage() {
       created_by: user?.id,
     },
     orderBy: {
-      serial: "desc"
-    }
-  })
+      serial: "desc",
+    },
+  });
 
   // total calculation
   const calculateTotalPrice = () => {
@@ -33,10 +33,12 @@ export default async function CartPage() {
       const itemTotal = parseInt(currentValue.total_price) || 0;
       return total + itemTotal;
     }, 0);
-  }
+  };
 
+  const totalPrice = parseInt(calculateTotalPrice().toFixed(2));
+  const grossPrice = calculateTotalPrice() + calculateTotalPrice() * (2 / 100);
 
-
+  // console.log(cartItems);
 
   return (
     <>
@@ -65,9 +67,10 @@ export default async function CartPage() {
             </div>
 
             {/* items list */}
-            {cartItems && cartItems.map((item)=> {
-              return <CartItemList key={item.serial} data={item} />
-            })}
+            {cartItems &&
+              cartItems.map((item) => {
+                return <CartItemList key={item.serial} data={item} />;
+              })}
 
             {/* total calculation */}
             <div className="grid grid-cols-12 bg-white p-7">
@@ -75,7 +78,7 @@ export default async function CartPage() {
               <div className="col-span-12 lg:col-span-6 w-full flex flex-col">
                 <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                   <p className="text-gray-800 font-medium">Subtotal</p>
-                  <p className="text-black text-sm">${calculateTotalPrice()}.00</p>
+                  <p className="text-black text-sm">${totalPrice.toFixed(2)}</p>
                 </div>
                 <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                   <p className="text-gray-800 font-medium">Vat (2%)</p>
@@ -88,29 +91,12 @@ export default async function CartPage() {
 
                 <div className="flex items-center justify-between mt-5 py-2">
                   <p className="text-gray-800 font-bold text-lg">Gross Total</p>
-                  <p className="text-black font-bold text-lg">${calculateTotalPrice() + calculateTotalPrice() * (2/100)}</p>
+                  <p className="text-black font-bold text-lg">
+                    ${grossPrice.toFixed(2)}
+                  </p>
                 </div>
 
-                <Link
-                  href={"/payment"}
-                  className="w-full bg-brand text-white p-2 text-center flex items-center justify-center gap-3 mt-5"
-                >
-                  <span>Checkout</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                    />
-                  </svg>
-                </Link>
+                <CheckOutButton cartItems={cartItems} />
               </div>
             </div>
           </div>

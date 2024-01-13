@@ -3,7 +3,7 @@ import { authOptions } from "@/utils/authoptions";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export async function POST(req) {
+export async function POST() {
   // session
   const session = await getServerSession(authOptions);
 
@@ -16,19 +16,36 @@ export async function POST(req) {
 
   const created_by = user?.id;
 
+  // cart by this user
+  const cart = await prisma.cart.findMany({
+    where: {
+      created_by: created_by,
+    },
+  });
+
+  // subtotal
+  const subtotal = cart.reduce((total, currentItems) => {
+    return total + parseInt(currentItems.total_price) || 0;
+  }, 0);
+
+  // gross total
+  const grossTotal = parseInt(subtotal) + parseInt(subtotal) * (2 / 100);
+
+  // console.log(subtotal);
+
   try {
     const createOrder = await prisma.orders.create({
       data: {
+        isPaid: false,
         created_by: created_by,
-        subtotal: "",
-        vat: "",
-        discount: "",
-        gross: "",
+        subtotal: subtotal.toString(),
+        gross: grossTotal.toString(),
+        items: cart,
       },
     });
 
     return NextResponse.json(
-      { msg: "success", data: createCart },
+      { msg: "success", data: createOrder },
       { status: 201 }
     );
   } catch (err) {

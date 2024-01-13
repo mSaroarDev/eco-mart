@@ -81,12 +81,11 @@ model products {
 model orders {
   id         String   @id @default(cuid())
   serial     Int      @unique @default(autoincrement())
-  status     String   @default("In Cart")
+  isPaid     Boolean
   created_by String
   subtotal   String
-  vat        String
-  discount   String
   gross      String
+  items      Json
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now()) @updatedAt
 }
