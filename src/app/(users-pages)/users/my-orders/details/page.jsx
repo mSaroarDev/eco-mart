@@ -1,8 +1,20 @@
 import CartItemList from "@/components/CartItemList";
 import MyOrderItemList from "@/components/DetailsOrderCard";
+import prisma from "@/lib/db";
 import Link from "next/link";
 
-export default function OrderSummaryPage() {
+export default async function OrderSummaryPage({searchParams}) {
+
+  // product fecth
+  const id = searchParams.order;
+  const data = await prisma.orders.findUnique({
+    where: {
+      id: id
+    }
+  })
+  console.log(data);
+
+
   return (
     <>
       <div>
@@ -11,19 +23,7 @@ export default function OrderSummaryPage() {
           <div className="p-1">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-medium">Order Summary</h2>
-              <form className="flex items-center gap-3 login">
-                <label htmlFor="change">Current Status</label> 
-                <select className="login-input appearance-none">
-                    <option value="">Select</option>
-                    <option value="">Order Placed</option>
-                    <option value="">Order Recieved</option>
-                    <option value="">Order Processing</option>
-                    <option value="">On The Way</option>
-                    <option value="">Delivered</option>
-                    <option value="">Cancel</option>
-                </select>
-                <button className="bg-brand text-white px-3 py-2 rounded-md">Update</button>
-              </form>
+              
             </div>
 
             <div className="bg-white mt-10 w-full">
@@ -36,10 +36,10 @@ export default function OrderSummaryPage() {
               </div>
 
               {/* items list */}
-              <MyOrderItemList />
-              <MyOrderItemList />
-              <MyOrderItemList />
-              <MyOrderItemList />
+
+              {data?.items && data?.items.map((item, i)=> {
+                return <MyOrderItemList key={i} data={item} />
+              })}
 
               {/* total calculation */}
               <div className="grid grid-cols-12 bg-white p-7">
@@ -47,11 +47,11 @@ export default function OrderSummaryPage() {
                 <div className="col-span-12 lg:col-span-6 w-full flex flex-col">
                   <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                     <p className="text-gray-800 font-medium">Subtotal</p>
-                    <p className="text-black text-sm">$500.00</p>
+                    <p className="text-black text-sm">${parseInt(data?.subtotal).toFixed(2)}</p>
                   </div>
                   <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                     <p className="text-gray-800 font-medium">Vat (2%)</p>
-                    <p className="text-black text-sm">$10.00</p>
+                    <p className="text-black text-sm">${(parseInt(data?.subtotal) * (2/100)).toFixed(2)}</p>
                   </div>
                   <div className="flex items-center justify-between border-b-[1px] border-gray-300 py-2">
                     <p className="text-gray-800 font-medium">Discount</p>
@@ -62,29 +62,8 @@ export default function OrderSummaryPage() {
                     <p className="text-gray-800 font-bold text-lg">
                       Gross Total
                     </p>
-                    <p className="text-black font-bold text-lg">$510.00</p>
+                    <p className="text-black font-bold text-lg">${data?.gross}</p>
                   </div>
-
-                  <Link
-                    href={"/checkout"}
-                    className="w-full bg-brand text-white p-2 text-center flex items-center justify-center gap-3 mt-5"
-                  >
-                    <span>Checkout</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                      />
-                    </svg>
-                  </Link>
                 </div>
               </div>
             </div>

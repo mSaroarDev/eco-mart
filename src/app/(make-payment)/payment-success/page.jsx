@@ -24,7 +24,7 @@ export default function PaymentSuccessPage() {
 
             <div className="col-span-12">
               <Link
-                href={"/users/payments"}
+                href={"/users/my-orders?page=1"}
                 type="submit"
                 className="bg-[#005C9D] py-3 w-full uppercase text-white rounded-md mt-3 text-center"
               >

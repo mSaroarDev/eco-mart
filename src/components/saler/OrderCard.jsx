@@ -1,5 +1,4 @@
 import formatDate from "@/lib/formatted-date";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function OrderCard({ data }) {
