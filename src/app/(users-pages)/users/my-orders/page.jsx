@@ -1,8 +1,38 @@
 import OrderCart from "@/components/OrderCart";
 import Paggination from "@/components/Paggination";
+import prisma from "@/lib/db";
+import { authOptions } from "@/utils/authoptions";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 
-export default function MyOrdersPage() {
+export default async function MyOrdersPage({searchParams}) {
+
+  // page
+  const pageNo = searchParams.page;
+
+  // user info
+  const session = await getServerSession(authOptions);
+  const user = await prisma.users.findUnique({
+    where: {
+      email: session?.user?.email
+    }
+  })
+
+  // total orders
+  const totalOrders = await prisma.orders.count();
+
+  // user orders
+  const orders = await prisma.orders.findMany({
+    skip: (pageNo - 1) * 10,
+    take: 10,
+    where: {
+      created_by: user?.id,
+    },
+    orderBy: {
+      serial: "desc"
+    }
+  })
+
   return (
     <>
       <div>
@@ -37,15 +67,14 @@ export default function MyOrdersPage() {
         {/* orders */}
         <div className="__orders">
           <div className="flex flex-col gap-3">
-            <OrderCart />
-            <OrderCart />
-            <OrderCart />
-            <OrderCart />
-            <OrderCart />
+            {orders && orders.map((order)=> {
+              return <OrderCart key={order.serial} data={order} />
+            })}
+            
           </div>
         </div>
         <div className="p-5 border-t-[1px] border-gray-300 flex items-center justify-end">
-          <Paggination count={100} nextLink={"/users/my-orders"} />
+          <Paggination count={totalOrders} nextLink={"/users/my-orders"} />
         </div>
       </div>
     </>

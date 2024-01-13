@@ -1,16 +1,31 @@
-import OrderCart from "@/components/OrderCart";
 import Paggination from "@/components/Paggination";
 import OrderCard from "@/components/saler/OrderCard";
-import Image from "next/image";
+import prisma from "@/lib/db";
 
-export default function MyOrdersPage() {
+export default async function MyOrdersPage({ searchParams }) {
+  // page
+  const pageNo = searchParams.page;
+
+  // orders
+  const totalOrders = await prisma.orders.count();
+  const orders = await prisma.orders.findMany({
+    where: {
+      isPaid: true,
+    },
+    skip: (pageNo - 1) * 10,
+    take: 10,
+    orderBy: {
+      serial: "desc",
+    },
+  });
+
   return (
     <>
       <div>
         <div className="flex items-center justify-between pb-5">
           <div>
-            <h1 className="text-lg font-bold text-black">My orders</h1>
-            <p className="text-gray-600 text-sm">Orders have you made yet</p>
+            <h1 className="text-lg font-bold text-black">Orders</h1>
+            <p className="text-gray-600 text-sm">Recent orders of your store</p>
           </div>
           <div>
             <button className="bg-brand text-white px-4 py-2 rounded-full flex items-center justify-center gap-2">
@@ -38,16 +53,14 @@ export default function MyOrdersPage() {
         {/* orders */}
         <div className="__orders">
           <div className="flex flex-col gap-3">
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
+            {orders &&
+              orders.map((order) => {
+                return <OrderCard key={order.serial} data={order} />;
+              })}
           </div>
         </div>
         <div className="p-5 border-t-[1px] border-gray-300 flex items-center justify-end">
-          <Paggination count={100} nextLink={"/users/my-orders"} />
+          <Paggination count={totalOrders} nextLink={"/saler/orders"} />
         </div>
       </div>
     </>

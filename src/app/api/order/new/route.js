@@ -40,6 +40,7 @@ export async function POST() {
         created_by: created_by,
         subtotal: subtotal.toString(),
         gross: grossTotal.toString(),
+        status: "Order Placed",
         items: cart,
       },
     });

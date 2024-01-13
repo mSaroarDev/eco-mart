@@ -44,7 +44,7 @@ export default function Sidenav() {
               </Link>
 
               <Link
-                href={"/users/my-orders"}
+                href={"/users/my-orders?page=1"}
                 className={`flex items-center gap-3 link-sidebar ${
                   path === "/users/my-orders" ? "link-active" : ""
                 }`}
@@ -101,7 +101,7 @@ export default function Sidenav() {
               </Link>
 
               <Link
-                href={"/users/payments"}
+                href={"/users/payments?page=1"}
                 className={`flex items-center gap-3 link-sidebar ${
                   path === "/users/payments" ? "link-active" : ""
                 }`}
