@@ -1,7 +1,16 @@
+import prisma from "@/lib/db";
 import CategoryList from "../CategorieList";
 import CategoryCard from "../CategoryCard";
 
-export default function FeturedCategoriesSection() {
+export default async function FeturedCategoriesSection() {
+
+  // categories
+  const categories = await prisma.featured_categories.findMany({
+    take: 5,
+    orderBy: {
+      order: "asc"
+  }
+  })
   return (
     <>
       <div className="bg-gray-100 py-14">
@@ -14,11 +23,7 @@ export default function FeturedCategoriesSection() {
           {/* category cards */}
           <div className="category__cards mt-7">
             <div className="flex flex-wrap items-center justify-between">
-                <CategoryCard />
-                <CategoryCard />
-                <CategoryCard /> 
-                <CategoryCard />
-                <CategoryCard />
+              {categories ? categories.map(category=> <CategoryCard key={category?.order} data={category} />) : "No Categories pinned. Pinn now from settings"}
             </div>
           </div>
         </div>
