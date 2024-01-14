@@ -71,6 +71,7 @@ export const authOptions = {
                 contact_no: "",
                 profile_image: image,
                 image_public_id: "",
+                
               }),
             }
           );

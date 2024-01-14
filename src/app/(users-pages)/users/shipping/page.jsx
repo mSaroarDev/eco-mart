@@ -1,6 +1,23 @@
 import ShippingForm from "@/components/user/ShippingForm";
+import prisma from "@/lib/db";
+import { authOptions } from "@/utils/authoptions";
+import { getServerSession } from "next-auth";
 
-export default function ShippingPage(){
+export default async function ShippingPage(){
+
+  // user
+  const session = await getServerSession(authOptions);
+  const user = await prisma.users.findUnique({
+    where: {
+      email: session?.user?.email
+    }
+  })
+
+  // shipping data
+  // const data = await prisma.shipping.findFirst({
+  //   where: 
+  // })
+
     return (
       <>
         <div>
