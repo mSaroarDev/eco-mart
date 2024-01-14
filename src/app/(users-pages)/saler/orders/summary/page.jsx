@@ -12,8 +12,13 @@ export default async function OrderSummaryPage({searchParams}) {
       id: id
     }
   })
-  console.log(data);
 
+  // shipping
+  const shippingAddress = await prisma.shipping.findFirst({
+    where: {
+      orderId: data?.id
+    }
+  })
 
   return (
     <>
@@ -88,11 +93,13 @@ export default async function OrderSummaryPage({searchParams}) {
             </div>
 
             <div className="text-center">
-                Customer Name: Sarowar Jahan, Email: msaroar.dev@gmail.com <br />
-                Darusha, Paba, Rajshahi <br />
-                Rajshahi, Bangladesh <br />
-                Post Code: 6210, Contact: +123456789
-            </div>
+                Customer Name: {shippingAddress?.customerName}, <br /> Email:{" "}
+                {shippingAddress?.email} <br />
+                {shippingAddress?.address} <br />
+                {shippingAddress?.city}, {shippingAddress?.state} <br />
+                Post Code: {shippingAddress?.postCode}, Contact:{" "}
+                {shippingAddress?.phone}
+              </div>
             </div>
 
           </div>
