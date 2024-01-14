@@ -64,7 +64,7 @@ export default function OrderStatusChangeButton({ data }) {
           <option value="Order Processing">Order Processing</option>
           <option value="On The Way">On The Way</option>
           <option value="Delivered">Delivered</option>
-          <option value="Cancel">Cancel</option>
+          <option value="Canceled">Cancel Order</option>
         </select>
         <button
           type="submit"

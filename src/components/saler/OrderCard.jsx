@@ -23,7 +23,7 @@ export default function OrderCard({ data }) {
         </div>
         <div className="w-1/4">
           <p className="text-gray-500 text-xs">Order Status</p>
-          <p className="text-brand text-sm font-bold mb-2">{data?.status}</p>
+          <p className={`text-sm font-bold mb-2 ${data?.status == "Delivered" ? "text-green-600" : data?.status == "Canceled" ? "text-red-600" : "text-brand" }`}>{data?.status}</p>
           <p className="text-gray-500 text-xs">Payment Status</p>
           <p className="text-brand text-sm font-bold">
             {data?.isPaid == true ? "Paid" : "Not Paid"}
