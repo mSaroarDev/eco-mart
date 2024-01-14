@@ -22,7 +22,7 @@ export default function Homepage() {
       </div>
       <HeroSection />
       <FeturedCategoriesSection />
-      {/* <BestSellerSection /> */}
+      <BestSellerSection />
       <FashionProductsSection />
       <RecentProductsSection />
       <SportsProductsSection />

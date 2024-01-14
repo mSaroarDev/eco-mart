@@ -18,7 +18,7 @@ export default function ProductCard({ data }) {
                 src={data?.product_image}
                 fill
                 alt={data?.product_name}
-                className="absolute inset-0 object-cover"
+                className="absolute inset-0 object-contain"
               />
             </div>
 

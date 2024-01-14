@@ -15,7 +15,7 @@ export default function TodaysDeals({ data }) {
             src={data?.product_image}
             fill
             alt="Bag"
-            className="absolute inset-0 object-cover"
+            className="absolute inset-0 object-contain"
           />
         </div>
 

@@ -52,15 +52,15 @@ export default function CartItem({data, removeAction}) {
     <>
       <div className="__product flex items-center justify-between gap-3">
         <div className="flex items-center justify-start gap-3">
-          <div className="w-16 h-16 relative">
+          <div className="w-24 h-16 relative">
             <Image
               src={item?.product_image}
               fill
               alt="image"
-              className="absolute inset-0 object-cover"
+              className="absolute inset-0 object-contain"
             />
           </div>
-          <div className="p-2">
+          <div className="p-2 w-full">
             
               <h2 className="font-medium hover:underline hover:text-brand">
                 {item?.product_name}

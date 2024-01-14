@@ -41,7 +41,8 @@ export default async function BestSellerSection() {
               </div>
 
               {/* todays deals card */}
-              <TodaysDeals data={product} />
+              {todayDeal && <TodaysDeals data={product} />}
+              
 
               {/* related products */}
               {/* <div className="__related_products px-10 py-2">
@@ -61,7 +62,7 @@ export default async function BestSellerSection() {
 
             {/* products */}
             <div className="flex flex-col gap-3">
-              <div className="w-full p-4">
+              <div className="w-full p-2">
                 {productsToShow && productsToShow.map((product)=> {
                   return <TodayBestSalesProducts key={product?.id} data={product} />
                 })}

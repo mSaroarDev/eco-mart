@@ -5,15 +5,15 @@ export default function TodayBestSalesProducts({ data }) {
   return (
     <>
       <div className="__product flex items-center gap-3 my-2">
-        <div className="w-14 h-14 relative">
+        <div className="w-24 h-16 relative">
           <Image
             src={data?.product_image}
             fill
             alt={data?.product_name}
-            className="absolute inset-0 object-cover"
+            className="absolute inset-0 object-contain"
           />
         </div>
-        <div className="p-1">
+        <div className="p-1 w-full">
           <Link href={`/p_details?p_=${data?.product_name}&p_id=${data?.id}`}>
             <h2 className="text-sm font-medium hover:underline hover:text-brand">
               {data?.product_name}
