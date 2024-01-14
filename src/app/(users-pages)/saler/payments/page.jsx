@@ -1,9 +1,25 @@
 import OrderCart from "@/components/OrderCart";
 import Paggination from "@/components/Paggination";
 import PaymentCard from "@/components/PaymentCard";
+import prisma from "@/lib/db";
 import Image from "next/image";
 
-export default function PaymentsPage() {
+export default async function PaymentsPage({searchParams}) {
+  // page
+  const page = searchParams.page;
+  // data
+  const totalData = await prisma.orders.count({
+    where: {
+      isPaid: true
+    }
+  })
+
+  const payments = await prisma.orders.findMany({
+    where: {
+      isPaid: true
+    }
+  })
+
   return (
     <>
       <div>
@@ -38,15 +54,13 @@ export default function PaymentsPage() {
         {/* orders */}
         <div className="__orders">
           <div className="flex flex-col gap-3">
-            <PaymentCard />
-            <PaymentCard />
-            <PaymentCard />
-            <PaymentCard />
-            <PaymentCard />
+            {payments && payments.map((payment,i)=> {
+              return <PaymentCard key={i} data={payment}/>
+            })}
           </div>
         </div>
         <div className="p-5 border-t-[1px] border-gray-300 flex items-center justify-end">
-          <Paggination count={100} nextLink={"/users/my-orders"} />
+          <Paggination count={totalData} nextLink={"/saler/payments"} />
         </div>
       </div>
     </>
