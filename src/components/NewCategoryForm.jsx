@@ -115,7 +115,7 @@ export default function NewCategoryPopup({ action }) {
       <Toaster />
       <div className="popup-overlay">
         <div className="h-screen w-full flex items-center justify-center">
-          <div className="popup-box w-[400px]">
+          <div className="popup-box w-[600px]">
             {loading && <Spinner />}
             <form className="flex items-start justify-end p-2">
               <button
