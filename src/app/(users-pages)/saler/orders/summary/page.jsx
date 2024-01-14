@@ -1,5 +1,6 @@
 import CartItemList from "@/components/CartItemList";
 import MyOrderItemList from "@/components/DetailsOrderCard";
+import OrderStatusChangeButton from "@/components/OrderStatusChanageButton";
 import prisma from "@/lib/db";
 import Link from "next/link";
 
@@ -28,19 +29,7 @@ export default async function OrderSummaryPage({searchParams}) {
           <div className="p-1">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-medium">Order Summary</h2>
-              <form className="flex items-center gap-3 login">
-                <label htmlFor="change">Current Status</label> 
-                <select className="login-input appearance-none">
-                    <option value="">Select</option>
-                    <option value="">Order Placed</option>
-                    <option value="">Order Recieved</option>
-                    <option value="">Order Processing</option>
-                    <option value="">On The Way</option>
-                    <option value="">Delivered</option>
-                    <option value="">Cancel</option>
-                </select>
-                <button className="bg-brand text-white px-3 py-2 rounded-md">Update</button>
-              </form>
+              <OrderStatusChangeButton data={data} />
             </div>
 
             <div className="bg-white mt-10 w-full">

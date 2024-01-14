@@ -69,7 +69,7 @@ export default function Sidenav() {
                 <span>My Orders</span>
               </Link>
 
-              <Link
+              {/* <Link
                 href={"/users/shipping"}
                 className={`flex items-center gap-3 link-sidebar ${
                   path === "/users/shipping" ? "link-active" : ""
@@ -124,7 +124,7 @@ export default function Sidenav() {
                 </span>
 
                 <span>Payments</span>
-              </Link>
+              </Link> */}
             </div>
           </div>
 
