@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Spinner from "./spinner/Spinner";
 import Link from "next/link";
+import formatDate from "@/lib/formatted-date";
 
 export default function OrderCart({data}) {
 
@@ -26,8 +27,10 @@ export default function OrderCart({data}) {
             <p className="text-brand text-sm font-bold">{data?.isPaid == true ? "Paid" : "Not Paid"}</p>
         </div>
         <div className="w-1/4">
-             <p className="text-gray-500 text-xs">Order Status</p>
-            <p className="text-brand text-sm font-bold">Processing</p>
+        <p className="text-gray-500 text-xs">Ordered at</p>
+            <p className="text-brand text-sm font-bold">{formatDate(data?.createdAt)}</p>
+             <p className="text-gray-500 text-xs mt-2">Order Status</p>
+            <p className="text-brand text-sm font-bold">{data?.status}</p>
         </div>
       </div>
     </>

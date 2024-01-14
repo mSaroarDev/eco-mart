@@ -12,7 +12,6 @@ export default async function OrderSummaryPage({searchParams}) {
       id: id
     }
   })
-  console.log(data);
 
 
   return (
