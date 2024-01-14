@@ -28,17 +28,6 @@ export async function POST(req) {
           contact_no: "",
           profile_image: "",
           image_public_id: "",
-          shipping: {
-            create: {
-              customerName: name,
-              email: email,
-              phone: "contact_no",
-              postCode: "Input here",
-              address: "Input here",
-              city: "Input here",
-              state: "Input here",
-            },
-          },
         },
       });
 

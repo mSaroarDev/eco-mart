@@ -35,7 +35,7 @@ export default function CheckOutButton(cartItems, totalPrice, grossPrice) {
       } else if (res.ok) {
         const data = await res.json()
         console.log(data?.data);
-        router.push(`/payment?transaction=visa&transaction_id=${data?.data?.id}&token=haklonaeohkvnlad093489uafo982y38hvai3oa09u09ajaioy0gaj`);
+        router.push(`/shipping?transaction=visa&transaction_id=${data?.data?.id}&token=haklonaeohkvnlad093489uafo982y38hvai3oa09u09ajaioy0gaj`);
 
       }
     },

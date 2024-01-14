@@ -26,39 +26,55 @@ export default function PaymentForm() {
   const formik = useFormik({
     initialValues: {
       isPaid: false,
+      cardNo: "",
+      cardName: "",
+      date: "",
+      month: "",
+      year: ""
     },
     onSubmit: async (values) => {
-      setLoading(true);
+      if (
+        !values.cardNo ||
+        !values.cardName ||
+        !values.date ||
+        !values.month ||
+        !values.year
+      ) {
+        showError("Input all fields");
+      } else {
+        setLoading(true);
 
-      // place order
-      const res = await fetch(`/api/order/payment?order_id=${trxId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      setLoading(false);
-      if (res.ok) {
-        // delete cart
-        await fetch("/api/cart/remove-all", {
-          method: "DELETE",
+        // place order
+        const res = await fetch(`/api/order/payment?order_id=${trxId}`, {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
         });
 
-        showSuccess("Order Placed Successfully.");
-        router.push(`/payment-success?via=visa&transaction_number=${trxId}`);
-      } else if (!res.ok) {
-        showError("Payment Failed");
+        setLoading(false);
+        if (res.ok) {
+          // delete cart
+          await fetch("/api/cart/remove-all", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          showSuccess("Order Placed Successfully.");
+          router.push(`/payment-success?via=visa&transaction_number=${trxId}`);
+        } else if (!res.ok) {
+          showError("Payment Failed");
+        }
       }
+      console.log(values);
     },
   });
 
   return (
     <>
-    {loading && <Spinner />}
+      {loading && <Spinner />}
       <div className="h-screen w-full bg-black/10 flex items-center justify-center">
         <div className="bg-white w-[400px] h-auto shadow-lg p-10 rounded-md">
           <div className="flex items-center justify-center">
@@ -71,7 +87,14 @@ export default function PaymentForm() {
           >
             <div className="col-span-8">
               <label htmlFor="card no">Card No</label> <br />
-              <input type="text" className="login-input w-full" />
+              <input
+                type="text"
+                id="cardNo"
+                name="cardNo"
+                value={formik.values.cardNo}
+                onChange={formik.handleChange}
+                className="login-input w-full"
+              />
             </div>
             <div className="col-span-4">
               <label htmlFor="card no">CVC</label> <br />
@@ -79,14 +102,27 @@ export default function PaymentForm() {
             </div>
             <div className="col-span-12">
               <label htmlFor="card no">Cardholder Name</label> <br />
-              <input type="text" className="login-input w-full" />
+              <input
+                type="text"
+                id="cardName"
+                name="cardName"
+                value={formik.values.cardName}
+                onChange={formik.handleChange}
+                className="login-input w-full"
+              />
             </div>
 
             <div className="col-span-12 -mb-3">
               <label htmlFor="date">Expiration Date</label>
             </div>
             <div className="col-span-4">
-              <select className="login-input w-full appearance-none">
+              <select
+                className="login-input w-full appearance-none"
+                id="date"
+                name="date"
+                value={formik.values.date}
+                onChange={formik.handleChange}
+              >
                 <option value="Date">Select Date</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
@@ -123,7 +159,13 @@ export default function PaymentForm() {
             </div>
 
             <div className="col-span-4">
-              <select className="login-input w-full appearance-none">
+              <select
+                className="login-input w-full appearance-none"
+                id="month"
+                name="month"
+                value={formik.values.month}
+                onChange={formik.handleChange}
+              >
                 <option value="select">Month</option>
                 <option value="01">January</option>
                 <option value="02">February</option>
@@ -143,6 +185,10 @@ export default function PaymentForm() {
             <div className="col-span-4">
               <input
                 type="text"
+                id="year"
+                name="year"
+                value={formik.values.year}
+                onChange={formik.handleChange}
                 className="login-input w-full"
                 placeholder="eg: 2018"
               />
