@@ -8,7 +8,7 @@ export default async function SignUpPage(){
   // session
   const session = await getServerSession(authOptions);
 
-  
+  if (session) {
     // get profile info
     const userInfo = await prisma.users.findUnique({
       where: {
@@ -21,6 +21,7 @@ export default async function SignUpPage(){
     } else if (userInfo?.role === "Saler") {
       redirect("/saler/dashboard");
     }
+  }
 
     return (
       <>

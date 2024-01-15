@@ -4,6 +4,9 @@ import RelatedTodayProduct from "../RelatedTodayProduct";
 import Link from "next/link";
 import TodayBestSalesProducts from "../TodayBestSaleProduct";
 import prisma from "@/lib/db";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/authoptions";
+import { redirect } from "next/navigation";
 
 export default async function BestSellerSection() {
 
@@ -13,6 +16,11 @@ export default async function BestSellerSection() {
       serial: "desc"
     }
   })
+
+  // redirect
+  if(todayDeal == undefined){
+    redirect("/logged")
+  }
 
   // product
   const product = await prisma.products.findUnique({

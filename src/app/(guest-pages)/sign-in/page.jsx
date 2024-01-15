@@ -4,12 +4,11 @@ import { authOptions } from "@/utils/authoptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export default async function SignInPage(){
-
+export default async function SignInPage() {
   // session
   const session = await getServerSession(authOptions);
 
-  
+  if (session) {
     // get profile info
     const userInfo = await prisma.users.findUnique({
       where: {
@@ -22,10 +21,11 @@ export default async function SignInPage(){
     } else if (userInfo?.role === "Saler") {
       redirect("/saler/dashboard");
     }
+  }
 
-    return (
-      <>
-        <LoginBox />
-      </>
-    )
+  return (
+    <>
+      <LoginBox />
+    </>
+  );
 }
