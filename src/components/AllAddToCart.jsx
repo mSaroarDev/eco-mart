@@ -4,8 +4,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Spinner from "./spinner/Spinner";
+import { useSession } from "next-auth/react";
 
 export default function AllAddtoCart({ data }) {
+  // session
+  const session = useSession();
+
   // route
   const router = useRouter();
 
@@ -25,17 +29,22 @@ export default function AllAddtoCart({ data }) {
   const qty = 1;
 
   const addToCart = () => {
-    setLoading(true);
-    createCart(productId, qty, price)
-      .then((data) => {
-        setLoading(false);
-        showSuccess("Product added to cart.");
-        router.refresh();
-      })
-      .catch((err) => {
-        setLoading(false);
-        showError("Product adding failed.");
-      });
+    if (!session) {
+      alert("You are not logged in.");
+    } else {
+      setLoading(true);
+      createCart(productId, qty, price)
+        .then((data) => {
+          setLoading(false);
+          showSuccess("Product added to cart.");
+          router.refresh();
+        })
+        .catch((err) => {
+          setLoading(false);
+          showError("Please sign in to buy product.");
+          router.push("/sign-in");
+        });
+    }
   };
 
   return (

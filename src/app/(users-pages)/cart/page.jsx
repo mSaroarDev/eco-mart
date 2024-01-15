@@ -7,10 +7,12 @@ import prisma from "@/lib/db";
 import { authOptions } from "@/utils/authoptions";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function CartPage() {
   // user info
   const session = await getServerSession(authOptions);
+  
   const user = await prisma.users.findUnique({
     where: {
       email: session?.user?.email,

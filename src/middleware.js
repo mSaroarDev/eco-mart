@@ -15,5 +15,5 @@ export { default } from "next-auth/middleware";
 // });
 
 export const config = {
-  matcher: ["/users/:path*", "/logged", "/saler/:path*"],
+  matcher: ["/users/:path*", "/logged", "/cart", "/saler/:path*"],
 };
