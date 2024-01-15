@@ -30,7 +30,7 @@ export default function PaymentForm() {
       cardName: "",
       date: "",
       month: "",
-      year: ""
+      year: "",
     },
     onSubmit: async (values) => {
       if (
@@ -81,9 +81,13 @@ export default function PaymentForm() {
             <Image src="/visa-logo.png" width={80} height={50} alt="Visa" />
           </div>
 
+          <span className="text-sm text-red-500 mb-5 mt-10 inline-block">
+            Input any dummy card information for purchase.
+          </span>
+
           <form
             onSubmit={formik.handleSubmit}
-            className="grid grid-cols-12 gap-4 login mt-10 uppercase text-sm"
+            className="grid grid-cols-12 gap-4 login uppercase text-sm"
           >
             <div className="col-span-8">
               <label htmlFor="card no">Card No</label> <br />
