@@ -5,7 +5,7 @@ export default async function CategoryListAll() {
   // categories
   const categories = await prisma.categories.findMany({
     orderBy: {
-      id: "asc",
+      serial: "asc",
     },
     take: 11,
   });
