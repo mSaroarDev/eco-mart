@@ -8,10 +8,7 @@ export default async function LoggedRedirect() {
   // session
   const session = await getServerSession(authOptions);
 
-  // redirect
-  if (!session) {
-    redirect("/sign-in");
-  } else {
+  
     // get profile info
     const userInfo = await prisma.users.findUnique({
       where: {
@@ -24,7 +21,7 @@ export default async function LoggedRedirect() {
     } else if (userInfo?.role === "Saler") {
       redirect("/saler/dashboard");
     }
-  }
+  
 
   return (
     <>

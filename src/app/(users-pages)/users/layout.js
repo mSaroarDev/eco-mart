@@ -2,11 +2,25 @@ import EditProfile from "@/components/user/EditProfile";
 import LayoutForProfile from "@/components/user/Layout";
 import MyProfileUser from "@/components/user/MyProfile";
 import Sidenav from "@/components/user/Sidenav";
+import prisma from "@/lib/db";
+import { authOptions } from "@/utils/authoptions";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function Layout({ children }) {
-  //profile action
+export default async function Layout({ children }) {
+  // user redirection
+  const session = await getServerSession(authOptions);
+  const user = await prisma.users.findUnique({
+    where: {
+      email: session?.user?.email,
+    },
+  });
 
-  const editProfile = () => {};
+  if (!session) {
+    redirect("/sign-in");
+  } else if (user?.role == "Saler") {
+    redirect("/saler/dashboard");
+  }
 
   return (
     <>

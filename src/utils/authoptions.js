@@ -45,8 +45,8 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/login",
-    signOut: "/login",
+    signIn: "/sign-in",
+    signOut: "/sign-in",
   },
 
   callbacks: {
@@ -71,7 +71,6 @@ export const authOptions = {
                 contact_no: "",
                 profile_image: image,
                 image_public_id: "",
-                
               }),
             }
           );

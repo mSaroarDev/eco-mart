@@ -13,7 +13,7 @@
     "cloudinary": "^2.0.0-rc",
     "formik": "^2.4.5",
     "md5": "^2.3.0",
-    "next": "14.0.4",
+    "next": "13.4.12",
     "next-auth": "^4.24.5",
     "next-cloudinary": "^5.18.0",
     "nextjs-toploader": "^1.6.4",
@@ -25,7 +25,7 @@
   "devDependencies": {
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "eslint-config-next": "13.4.12",
     "postcss": "^8",
     "prisma": "^5.7.1",
     "tailwindcss": "^3.3.0"
