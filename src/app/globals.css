@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-size: 14px;
+}
+
 /* custon fonts */
 .lato {
   font-family: "Lato", sans-serif;
@@ -13,6 +17,7 @@
 .poppins {
   font-family: "Poppins", sans-serif;
 }
+
 
 /* scrollbar */
 /* Scrollbar */
